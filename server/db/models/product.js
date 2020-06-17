@@ -35,7 +35,7 @@ var Product = db.define('product', {
     defualtValue: 0
   },
   price: {
-    type: Sequelize.NUMBER,
+    type: Sequelize.DOUBLE(4, 2),
     allowNull: false,
     validate: {
       notEmpty: true

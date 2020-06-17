@@ -28,7 +28,7 @@ var Order = db.define('order', {
     }
   },
   totalCost: {
-    type: Sequelize.NUMBER,
+    type: Sequelize.DOUBLE(4, 2),
     allowNull: false,
     validate: {
       notEmpty: true
