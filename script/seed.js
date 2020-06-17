@@ -36,21 +36,18 @@ const dummyOrders = [
     items: [],
     paymentMethod: 'Visa',
     shippingAddress: '123 Seasame St, Brooklyn, NY 12345',
-    category: 'Arts',
     total: items.reduce((acc, curr) => acc + curr, 0)
   },
   {
     items: [],
     paymentMethod: 'Capital One',
     shippingAddress: '123 Seasame St, Brooklyn, NY 12345',
-    category: 'Crafts',
     total: items.reduce((acc, curr) => acc + curr, 0)
   },
   {
     items: [],
     paymentMethod: 'American Express',
     shippingAddress: '123 Seasame St, Brooklyn, NY 12345',
-    category: 'Dance',
     total: items.reduce((acc, curr) => acc + curr, 0)
   }
 ]
