@@ -1,6 +1,13 @@
 # grace-shopper
 
+Our Website: Quarantivities 
+
 Group contract: https://docs.google.com/document/d/10bYVZiDEGtDfk-4ZpcsOIatBHaI01xMer3WYo8-FpDU/edit
+
+Wireframes : https://framer.com/share/Grace-Shopper-Prototype-yrlLlke8Ljk5Zf3W0KdU/D_wtZOn_K
+
+Data Schemas: https://dbdiagram.io/d/5ee920179ea313663b3aa56f
+
 
 # Boilermaker
 
