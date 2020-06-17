@@ -9,7 +9,7 @@ const dummyData = [
     amount: 300
   },
   {
-    id: 1,
+    id: 2,
     name: 'Build a Terranium',
     description: 'akftigt',
     imageUrl:
@@ -19,7 +19,7 @@ const dummyData = [
     amount: 300
   },
   {
-    id: 1,
+    id: 3,
     name: 'Salsa Night!',
     description: 'hfotth',
     imageUrl: 'https://media.istockphoto.com/photos/dance-picture-id181083498',
