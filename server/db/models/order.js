@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-var Order = sequelize.define('order', {
+var Order = db.define('order', {
   products: {
     type: Sequelize.STRING,
     get: function() {
