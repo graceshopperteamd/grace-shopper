@@ -1,10 +1,23 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchOneProduct} from '../store/product'
+import {addProductToCart} from '../store/cart'
 
 class OneProduct extends React.Component {
+  constructor() {
+    super()
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
   componentDidMount() {
     this.props.fetchOneProduct(this.props.match.params.id)
+  }
+
+  handleSubmit(event) {
+    event.preventDefault()
+    const input = Number(document.getElementById('quantity').value)
+    console.log(input)
+    const product = {...this.props.currProduct, amount: input}
+    this.props.addToCart(product)
   }
 
   render() {
@@ -13,7 +26,7 @@ class OneProduct extends React.Component {
         <img src={this.props.currProduct.imageUrl} />
         <h3>{this.props.currProduct.name}</h3>
         <p>price: {this.props.currProduct.price}</p>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <label htmlFor="quantity">Quantity</label>
           <input type="number" id="quantity" min="1" max="20" />
           <button type="submit">Add To Cart</button>
@@ -31,7 +44,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchOneProduct: () => dispatch(fetchOneProduct())
+    fetchOneProduct: () => dispatch(fetchOneProduct()),
+    addToCart: obj => dispatch(addProductToCart(obj))
   }
 }
 
