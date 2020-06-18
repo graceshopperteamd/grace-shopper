@@ -62,18 +62,12 @@ export const fetchOneProduct = id => {
   }
 }
 
-const initialState = {
-  products: [],
-  currProduct: {}
-}
+const products = []
 
-export default function productsReducer(state = initialState, action) {
+export default function productsReducer(state = products, action) {
   switch (action.type) {
     case GET_ALL_PRODUCTS: {
-      return {...state, products: action.products}
-    }
-    case GET_ONE_PRODUCT: {
-      return {...state, currProduct: action.currProduct}
+      return action.products
     }
     default:
       return state

@@ -22,7 +22,7 @@ export class AllProducts extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    products: state.products.products
+    products: state.products
   }
 }
 

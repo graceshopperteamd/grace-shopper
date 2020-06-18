@@ -38,7 +38,7 @@ class OneProduct extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currProduct: state.products.currProduct
+    currProduct: state.currProduct
   }
 }
 
