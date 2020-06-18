@@ -1,10 +1,11 @@
 'use strict'
 
 const db = require('../server/db')
-const {User, Product, Order} = require('../server/db/models')
+const {User, Product, Order, Relationship} = require('../server/db/models')
 
 const items = [
   {
+    productId: 1,
     name: 'Paint & Wine Night',
     description: 'rhhtgti',
     imageUrl: 'https://www.onlygfx.com/10-abstract-acrylic-paint-texture-jpg/',
@@ -13,6 +14,7 @@ const items = [
     amount: 300
   },
   {
+    productId: 2,
     name: 'Build a Terranium',
     description: 'akftigt',
     imageUrl:
@@ -22,6 +24,7 @@ const items = [
     amount: 300
   },
   {
+    productId: 3,
     name: 'Salsa Night!',
     description: 'hfitgitho',
     imageUrl: 'https://media.istockphoto.com/photos/dance-picture-id181083498',
@@ -33,22 +36,40 @@ const items = [
 
 const dummyOrders = [
   {
-    items: [],
+    userId: 1,
     paymentMethod: 'Visa',
     shippingAddress: '123 Seasame St, Brooklyn, NY 12345',
-    total: items.reduce((acc, curr) => acc + curr, 0)
+    total: 0
   },
   {
-    items: [],
+    userId: 2,
     paymentMethod: 'Capital One',
     shippingAddress: '123 Seasame St, Brooklyn, NY 12345',
-    total: items.reduce((acc, curr) => acc + curr, 0)
+    total: 0
   },
   {
-    items: [],
+    userId: 2,
     paymentMethod: 'American Express',
     shippingAddress: '123 Seasame St, Brooklyn, NY 12345',
-    total: items.reduce((acc, curr) => acc + curr, 0)
+    total: 0
+  }
+]
+
+const relationships = [
+  {
+    orderId: 1,
+    productId: 1,
+    priceAtPurchase: 234.43
+  },
+  {
+    orderId: 2,
+    productId: 3,
+    priceAtPurchase: 521.01
+  },
+  {
+    orderId: 1,
+    productId: 3,
+    priceAtPurchase: 134.07
   }
 ]
 
@@ -72,6 +93,10 @@ async function seed() {
   await Promise.all(items.map(item => Product.create(item)))
 
   await Promise.all(dummyOrders.map(order => Order.create(order)))
+
+  await Promise.all(
+    relationships.map(relationship => Relationship.create(relationship))
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
