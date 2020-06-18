@@ -5,4 +5,5 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
+export {ConnectedCart, ConnectedCheckout} from './Cart-Checkout'
 export {Login, Signup} from './auth-form'
