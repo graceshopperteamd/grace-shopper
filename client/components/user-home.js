@@ -6,7 +6,6 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 
-// change imports to new file name
 export const UserHome = props => {
   const {email} = props
 

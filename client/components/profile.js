@@ -1,36 +1,34 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+import {fetchUser} from '../store/profile'
+// import {OneProduct} from './One-Product'
 
-/**
- * COMPONENT
- */
+export class Profile extends React.Component {
+  componentDidMount() {
+    this.props.fetchUser(1)
+  }
 
-// change imports to new file name
-export const UserHome = props => {
-  const {email} = props
-
-  return (
-    <div>
-      <h3>Welcome, {email}</h3>
-    </div>
-  )
-}
-
-/**
- * CONTAINER
- */
-const mapState = state => {
-  return {
-    email: state.user.email
+  render() {
+    console.log('props: ', this.props)
+    return (
+      <div>
+        <h1>Welcome, {this.props.user.username}!</h1>
+        <h3>email: {this.props.user.email}</h3>
+      </div>
+    )
   }
 }
 
-export default connect(mapState)(UserHome)
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-  email: PropTypes.string
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchUser: () => dispatch(fetchUser(1))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
