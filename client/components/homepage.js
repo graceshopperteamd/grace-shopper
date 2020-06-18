@@ -8,23 +8,7 @@ import {connect} from 'react-redux'
 export class HomePage extends React.Component {
   constructor() {
     super()
-    // this.state = {
-    //   robotName: ''
-    // }
-    // this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleChange = this.handleChange.bind(this)
   }
-
-  // handleChange(event){
-  //   this.setState({robotName: event.target.value});
-  // }
-
-  // handleSubmit(event){
-  //   event.preventDefault();
-  //   const newRobotName = event.target.robotName.value;
-  //   this.props.addRobot(newRobotName);
-  //   alert(newRobotName)
-  // }
 
   render() {
     return <h3>Hello World, its Suraj!</h3>
