@@ -26,9 +26,18 @@ class OneProduct extends React.Component {
         <img src={this.props.currProduct.imageUrl} />
         <h3>{this.props.currProduct.name}</h3>
         <p>price: {this.props.currProduct.price}</p>
+        <p>What you're getting: {this.props.currProduct.description}</p>
+
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="quantity">Quantity</label>
-          <input type="number" id="quantity" min="1" max="20" />
+          <input
+            type="number"
+            id="quantity"
+            min="1"
+            max="20"
+            placeholder="quantity"
+          />
+          <br />
           <button type="submit">Add To Cart</button>
         </form>
       </div>

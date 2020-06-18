@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
 import {OneProduct} from './One-Product'
 
-export class AllProducts extends React.Component {
+class AllProducts extends React.Component {
   componentDidMount() {
     this.props.fetchProducts()
   }
