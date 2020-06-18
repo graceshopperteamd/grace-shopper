@@ -19,3 +19,50 @@ form div {
   margin: 1em;
   display: inline-block;
 }
+
+.cartItems {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2em;
+  border: solid;
+}
+.cartItems img {
+  height: 150px;
+  width: auto;
+}
+.cartItems div {
+  margin: 1em;
+}
+
+.cartPageBtns {
+  display: flex;
+  justify-content: space-between;
+  margin: 3em;
+  padding: 0.5em;
+}
+
+.cartPageBtns link button {
+  margin: 3em;
+  padding: 0.5em;
+}
+
+.checkoutForm {
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  padding: 1em;
+  border: dotted;
+}
+
+.checkoutForm button {
+  margin: 3em;
+  padding: 0.5em;
+}
+
+.checkoutForm .checkoutPageBtns {
+  display: flex;
+  justify-content: space-between;
+  margin: 3em;
+  padding: 0.5em;
+}
