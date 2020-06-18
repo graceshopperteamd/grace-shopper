@@ -32,6 +32,7 @@ const dummyData = [
 ]
 
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
+const GET_ONE_PRODUCT = 'GET_ONE_PRODUCT'
 
 const gotProducts = products => {
   return {
@@ -40,10 +41,24 @@ const gotProducts = products => {
   }
 }
 
+const gotOneProduct = currProduct => {
+  return {
+    type: GET_ONE_PRODUCT,
+    currProduct
+  }
+}
+
 export const fetchProducts = () => {
   return dispatch => {
     // const {data} = await axios('/api/products')
     dispatch(gotProducts(dummyData))
+  }
+}
+
+export const fetchOneProduct = id => {
+  return dispatch => {
+    // const {data} = await axios(`/api/products/${id}`)
+    dispatch(gotOneProduct(dummyData[0]))
   }
 }
 
@@ -56,6 +71,9 @@ export default function productsReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_PRODUCTS: {
       return {...state, products: action.products}
+    }
+    case GET_ONE_PRODUCT: {
+      return {...state, currProduct: action.currProduct}
     }
     default:
       return state
