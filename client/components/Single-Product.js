@@ -8,7 +8,6 @@ class OneProduct extends React.Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <img src={this.props.currProduct.imageUrl} />
