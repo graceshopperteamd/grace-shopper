@@ -8,7 +8,7 @@ export const OneProduct = props => {
         <h2>{props.product.name}</h2>
         <img src={props.product.imageUrl} />
       </Link>
-      <h4>price: {props.product.price}</h4>
+      <h4>price: ${props.product.price}</h4>
     </div>
   )
 }
