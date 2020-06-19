@@ -11,7 +11,13 @@ export class HomePage extends React.Component {
   }
 
   render() {
-    return <h3>Hello World, its Suraj!</h3>
+    return (
+      <div>
+        <h3>Hello World!</h3>
+
+        <p> You are not logged in, please log in to see your home page</p>
+      </div>
+    )
   }
 }
 
