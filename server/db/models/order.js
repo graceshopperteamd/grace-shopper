@@ -4,7 +4,6 @@ const db = require('../db')
 var Order = db.define('order', {
   paymentMethod: {
     type: Sequelize.STRING,
-    unique: true,
     allowNull: false,
     validate: {
       notEmpty: true
