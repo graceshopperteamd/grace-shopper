@@ -22,11 +22,7 @@ var Order = db.define('order', {
     validate: {
       notEmpty: true
     },
-    defualtValue: 0.0
-  },
-  isCompleted: {
-    type: Sequelize.BOOLEAN,
-    defualtValue: 0
+    defaultValue: 0.0
   }
 })
 
