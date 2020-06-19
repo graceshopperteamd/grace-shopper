@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchOneProduct} from '../store/product'
-import {addProductToCart} from '../store/cart'
+import {AddToCart} from '../store/shoppingCart'
 
 class OneProduct extends React.Component {
   constructor() {
@@ -16,15 +16,15 @@ class OneProduct extends React.Component {
     event.preventDefault()
     const input = Number(document.getElementById('quantity').value)
     console.log(input)
-    const product = {...this.props.currProduct, amount: input}
-    this.props.addToCart(product)
+    // const product = {...this.props.currProduct, quantity: input}
+    this.props.addToCart(this.props.currProduct)
   }
 
   render() {
     return (
       <div>
-        <img src={this.props.currProduct.imageUrl} />
         <h3>{this.props.currProduct.name}</h3>
+        <img src={this.props.currProduct.imageUrl} />
         <p>price: {this.props.currProduct.price}</p>
         <p>What you're getting: {this.props.currProduct.description}</p>
 
@@ -53,8 +53,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchOneProduct: () => dispatch(fetchOneProduct()),
-    addToCart: obj => dispatch(addProductToCart(obj))
+    fetchOneProduct: id => dispatch(fetchOneProduct(id)),
+    addToCart: obj => dispatch(AddToCart(obj))
   }
 }
 

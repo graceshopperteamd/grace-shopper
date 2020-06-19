@@ -5,16 +5,15 @@ const {User, Product, Order, Relationship} = require('../server/db/models')
 
 const items = [
   {
-    productId: 1,
     name: 'Paint & Wine Night',
     description: 'rhhtgti',
-    imageUrl: 'https://www.onlygfx.com/10-abstract-acrylic-paint-texture-jpg/',
+    imageUrl:
+      'https://images.squarespace-cdn.com/content/57c705d2bebafb286be9d66d/1512414729677-55YXXUB9UGDSPTGFK8JE/paint-night.jpg?content-type=image%2Fjpeg',
     category: 'Arts',
     price: 20,
     amount: 300
   },
   {
-    productId: 2,
     name: 'Build a Terranium',
     description: 'akftigt',
     imageUrl:
@@ -24,7 +23,6 @@ const items = [
     amount: 300
   },
   {
-    productId: 3,
     name: 'Salsa Night!',
     description: 'hfitgitho',
     imageUrl: 'https://media.istockphoto.com/photos/dance-picture-id181083498',
