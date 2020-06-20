@@ -50,7 +50,8 @@ for (let i = 0; i < DUMMY_DATA_AMOUNT; i++) {
   const orderId = i + 1
   const productId = i + 1
   const priceAtPurchase = faker.commerce.price()
-  const cart = {orderId, productId, priceAtPurchase}
+  const itemAmount = Math.ceil(Math.random() * 10)
+  const cart = {orderId, productId, priceAtPurchase, itemAmount}
   relationships.push(cart)
 }
 
