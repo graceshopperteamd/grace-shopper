@@ -8,7 +8,7 @@ import products from './product'
 import currProduct from './single-product'
 
 const reducer = combineReducers({
-  user: user,
+  user,
   products,
   currProduct,
   shoppingcart: cartReducer

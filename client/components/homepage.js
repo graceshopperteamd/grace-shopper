@@ -15,7 +15,11 @@ export class HomePage extends React.Component {
       <div>
         <h3>Hello World!</h3>
 
-        <p> You are not logged in, please log in to see your home page</p>
+        <p>
+          {' '}
+          You are not logged in, please log in to see your personalized home
+          page
+        </p>
       </div>
     )
   }
