@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-var Order = db.define('order', {
+const Order = db.define('order', {
   paymentMethod: {
     type: Sequelize.STRING,
     allowNull: false,

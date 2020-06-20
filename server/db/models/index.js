@@ -1,4 +1,5 @@
 const User = require('./user')
+const Cart = require('./cart')
 const Order = require('./order')
 const Product = require('./product')
 const {Sequelize} = require('sequelize')
@@ -31,12 +32,25 @@ const Relationship = db.define('OrderProducts', {
   }
 })
 
+const CartRelationship = db.define('CartProducts', {
+  itemAmount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
+  }
+})
+
 Product.belongsToMany(Order, {through: 'OrderProducts'})
 Order.belongsToMany(Product, {through: 'OrderProducts'})
 
+Cart.belongsTo(User)
+Cart.belongsToMany(Product, {through: 'CartProducts'})
+Product.belongsToMany(Cart, {through: 'CartProducts'})
+
 module.exports = {
   User,
+  Cart,
   Order,
   Product,
-  Relationship
+  Relationship,
+  CartRelationship
 }

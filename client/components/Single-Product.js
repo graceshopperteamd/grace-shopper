@@ -22,7 +22,8 @@ class OneProduct extends React.Component {
 
   render() {
     return (
-      <div>
+      // className is for easy acces in css styling later
+      <div className="singleProduct">
         <h3>{this.props.currProduct.name}</h3>
         <img src={this.props.currProduct.imageUrl} />
         <p>price: {this.props.currProduct.price}</p>
