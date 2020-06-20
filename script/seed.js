@@ -3,7 +3,7 @@
 const db = require('../server/db')
 const {User, Product, Order, Relationship} = require('../server/db/models')
 const faker = require('faker')
-const {use} = require('chai')
+// const {use} = require('chai')
 
 const DUMMY_DATA_AMOUNT = 100
 

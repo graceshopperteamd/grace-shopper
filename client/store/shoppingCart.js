@@ -1,4 +1,4 @@
-// import axios from 'axios'
+import axios from 'axios'
 
 // dummy data for component
 const dummyData = [
@@ -52,10 +52,23 @@ const defaultCart = []
 export const AddToCart = product => ({type: ADD_TO_CART, product})
 const gotCart = shoppingcart => ({type: GOT_CART, shoppingcart})
 const cartErrorAction = error => ({type: CART_ERROR, error})
-
 /**
  * THUNK CREATORS
  */
+
+export const addProdToCart = singleProd => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.put('/api/cart', singleProd)
+      if (data) {
+        dispatch(AddToCart(data))
+      }
+    } catch (error) {
+      dispatch(cartErrorAction(error))
+    }
+  }
+}
+
 export const fetchCart = () => {
   return async function getCartThunk(dispatch) {
     try {
@@ -75,7 +88,7 @@ export const fetchCart = () => {
 export function cartReducer(state = defaultCart, action) {
   switch (action.type) {
     case ADD_TO_CART: {
-      return [...state, action.product]
+      return action.product
     }
     case GOT_CART:
       return action.shoppingcart

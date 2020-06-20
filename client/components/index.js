@@ -5,7 +5,7 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
-export {default as HomePage} from './homepage'
+export {HomePage} from './homepage'
 export {default as AllProducts} from './All-Products'
 export {default as SingleProduct} from './Single-Product'
 export {ConnectedCart, ConnectedCheckout} from './Cart-Checkout'
