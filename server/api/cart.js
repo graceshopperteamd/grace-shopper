@@ -1,6 +1,27 @@
+const dummyData = require('../../dummyData')
 const router = require('express').Router()
 module.exports = router
 const {Cart, Product, CartRelationship} = require('../db/models')
+
+router.get('/', async (req, res, next) => {
+  try {
+    let cart = await Cart.findOne({
+      where: {
+        userId: req.body.userId
+      },
+      include: {
+        model: Product,
+        as: 'CartProducts'
+      }
+    })
+    // just till we get the add to cart button sorted so that I can see when I break stuff
+    if (!cart) cart = dummyData
+    if (cart) res.status(200).send(cart)
+    else res.sendStatus(500)
+  } catch (error) {
+    next(error)
+  }
+})
 
 router.put('/', async (req, res, next) => {
   try {
@@ -44,3 +65,17 @@ router.put('/', async (req, res, next) => {
     next(err)
   }
 })
+
+// router.post('/', async (req, res, next) => {
+//   try {
+//   } catch (error) {
+//     next(error)
+//   }
+// })
+
+// router.delete('/', async (req, res, next) => {
+//   try {
+//   } catch (error) {
+//     next(error)
+//   }
+// })
