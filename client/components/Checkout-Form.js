@@ -74,8 +74,39 @@ export const checkoutForm = (
         </div>
       </div>
 
+      <label htmlFor="cardType">
+        {' '}
+        <small>Payment Information</small>{' '}
+      </label>
+      <div>
+        <div>
+          <input
+            name="cardType"
+            type="text"
+            placeholder="Visa, MasterCard, etc"
+          />
+        </div>
+        <div>
+          <input
+            name="cardNum"
+            type="password"
+            placeholder="Credit/Debit Card #"
+          />
+        </div>
+        <div>
+          <input name="expiration" type="text" placeholder="Expiration Date" />
+        </div>
+        <div>
+          <input
+            name="securityCode"
+            type="password"
+            placeholder="Security Code"
+          />
+        </div>
+      </div>
+
       <div className="CheckoutPageBtns">
-        <Link to="/">
+        <Link to="/products">
           {' '}
           <button type="button">Back to Browse</button>{' '}
         </Link>

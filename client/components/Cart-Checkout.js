@@ -4,11 +4,11 @@ import {connect} from 'react-redux'
 import {fetchCart} from '../store/shoppingCart'
 import {checkoutForm} from './Checkout-Form'
 
+// cart page component
 class Cart extends React.Component {
   constructor(props) {
     super(props)
   }
-
   componentDidMount() {
     this.props.getCart()
   }
@@ -21,7 +21,7 @@ class Cart extends React.Component {
           <div>{createCartDiv(this.props.shoppingcart)}</div>
 
           <div className="cartPageBtns">
-            <Link to="/">
+            <Link to="/products">
               <button type="button">Back to Browse</button>
             </Link>
             <Link to="/checkout">
@@ -34,11 +34,11 @@ class Cart extends React.Component {
   }
 }
 
+// checkout page component
 class Checkout extends React.Component {
   constructor(props) {
     super(props)
   }
-
   componentDidMount() {
     this.props.getCart()
   }
@@ -49,6 +49,7 @@ class Checkout extends React.Component {
         <div>
           <h2> Checkout </h2>
           <div>{createCartDiv(this.props.shoppingcart)}</div>
+          {/* Checkout form component which is imported from /components/Checkout-Form */}
           <div>{checkoutForm}</div>
         </div>
       )
@@ -56,6 +57,7 @@ class Checkout extends React.Component {
   }
 }
 
+// factory func maps through all products in shopping cart and creates a component for each
 const createCartDiv = cartArray => {
   return cartArray.map(item => (
     <div key={item.id} className="cartItems">
