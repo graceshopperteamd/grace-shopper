@@ -29,6 +29,10 @@ const Relationship = db.define('OrderProducts', {
     validate: {
       notEmpty: true
     }
+  },
+  itemAmount: {
+    type: Sequelize.INTEGER,
+    defaultValue: 0
   }
 })
 
