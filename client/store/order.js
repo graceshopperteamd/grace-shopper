@@ -9,7 +9,7 @@ const orderErrorAction = error => ({type: ORDER_ERROR, error})
 export const makeOrder = order => {
   return async dispatch => {
     try {
-      const {data} = await axios.get('/api/order', order)
+      const {data} = await axios.post('/api/order', order)
       if (data) {
         dispatch(placeOrder(data))
       }
