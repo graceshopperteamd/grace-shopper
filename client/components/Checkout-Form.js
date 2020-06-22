@@ -1,6 +1,10 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 
+const handleSubmit = () => {
+  return alert('YAY! Your Order has been placed!!')
+}
+
 export const checkoutForm = (
   <div>
     <form onSubmit={handleSubmit} name={name} className="checkoutForm">
@@ -84,7 +88,3 @@ export const checkoutForm = (
     </form>
   </div>
 )
-
-const handleSubmit = () => {
-  return alert('YAY! Your Order has been placed!!')
-}

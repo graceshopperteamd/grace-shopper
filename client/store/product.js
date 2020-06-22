@@ -24,13 +24,6 @@ export const fetchProducts = () => {
   }
 }
 
-export const fetchOneProduct = id => {
-  return async dispatch => {
-    const {data} = await axios(`/api/products/${id}`)
-    dispatch(gotOneProduct(data))
-  }
-}
-
 const products = []
 
 export default function productsReducer(state = products, action) {

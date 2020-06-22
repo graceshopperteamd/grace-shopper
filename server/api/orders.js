@@ -2,16 +2,6 @@ const router = require('express').Router()
 module.exports = router
 const {Cart, Product, CartRelationship} = require('../db/models')
 
-router.get('/', async (req, res, next) => {
-  try {
-    const cart = await Cart.findAll()
-    console.log(cart)
-    res.json(cart)
-  } catch (err) {
-    next(err)
-  }
-})
-
 router.put('/', async (req, res, next) => {
   try {
     const currProduct = await Product.findByPk(req.body.id)

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchOneProduct} from '../store/product'
+import {fetchOneProduct} from '../store/single-product'
 import {addProdToCart} from '../store/shoppingCart'
 import {Link} from 'react-router-dom'
 

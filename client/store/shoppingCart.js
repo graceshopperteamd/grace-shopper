@@ -70,12 +70,11 @@ export const addProdToCart = singleProd => {
 }
 
 export const fetchCart = () => {
-  return async function getCartThunk(dispatch) {
+  return async dispatch => {
     try {
-      //eventually get cart data from DB, for now use dummy data
-      let cart = dummyData
+      const {data} = await axios.get('/api/cart')
 
-      dispatch(gotCart(cart))
+      dispatch(gotCart(data))
     } catch (error) {
       dispatch(cartErrorAction(error))
     }
