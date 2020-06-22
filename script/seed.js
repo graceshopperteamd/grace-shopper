@@ -1,16 +1,77 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+const {User, Product, Order, Relationship} = require('../server/db/models')
+const faker = require('faker')
+// const {use} = require('chai')
+
+const DUMMY_DATA_AMOUNT = 100
+
+const users = []
+
+for (let i = 0; i < DUMMY_DATA_AMOUNT; i++) {
+  const username = `${faker.name.firstName()} ${faker.name.lastName()}`
+  const email = `{faker.lorem.word()}@${faker.lorem.word()}.com`
+  const password = `${faker.lorem.words(3)}`
+  const user = {username, email, password}
+  users.push(user)
+}
+
+const items = []
+
+for (let i = 0; i < DUMMY_DATA_AMOUNT; i++) {
+  const productId = i + 1
+  const name = faker.commerce.productName()
+  const description = 'WOW! So much lorem, so much ipsem!'
+  const imageUrl = faker.image.cats()
+  const category = faker.commerce.department()
+  const price = faker.commerce.price()
+  const amount = Math.floor(Math.random() * 10)
+  const item = {productId, name, description, imageUrl, category, price, amount}
+  items.push(item)
+}
+
+const dummyOrders = []
+
+for (let i = 0; i < DUMMY_DATA_AMOUNT; i++) {
+  const userId = Math.ceil(Math.random() * DUMMY_DATA_AMOUNT)
+
+  const paymentMethod = faker.lorem.word()
+  const shippingAddress = `${faker.address.streetAddress()}, ${faker.address.city()}, ${faker.address.stateAbbr()} ${faker.address.zipCode()}`
+  const total = faker.commerce.price()
+  const isComplete = false
+  const order = {userId, paymentMethod, shippingAddress, total, isComplete}
+  dummyOrders.push(order)
+}
+
+const relationships = []
+
+for (let i = 0; i < DUMMY_DATA_AMOUNT; i++) {
+  const orderId = i + 1
+  const productId = i + 1
+  const priceAtPurchase = faker.commerce.price()
+  const itemAmount = Math.ceil(Math.random() * 10)
+  const cart = {orderId, productId, priceAtPurchase, itemAmount}
+  relationships.push(cart)
+}
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
-  ])
+  await Promise.all(users.map(user => User.create(user)))
+
+  await Promise.all(items.map(item => Product.create(item)))
+
+  await Promise.all(
+    dummyOrders.map(async order => {
+      Order.create(order)
+    })
+  )
+
+  await Promise.all(
+    relationships.map(relationship => Relationship.create(relationship))
+  )
 
   console.log(`seeded ${users.length} users`)
   console.log(`seeded successfully`)
