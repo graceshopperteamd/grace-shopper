@@ -9,6 +9,7 @@ class AllProducts extends React.Component {
   }
 
   render() {
+    console.log('products props: ', this.props)
     return (
       <div>
         <h2>Our Packages!</h2>

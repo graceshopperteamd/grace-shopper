@@ -3,8 +3,8 @@ import axios from 'axios'
 const dummyData = [
   {
     id: 1,
-    username: 'Cody',
-    email: 'cody@gmail.com',
+    username: 'Ben',
+    email: 'ben@gmail.com',
     password: '123'
   },
   {
@@ -40,20 +40,17 @@ const gotUser = user => {
 
 export const fetchUsers = () => {
   return dispatch => {
-    // const {data} = await axios('/api/users')
     dispatch(gotUsers(dummyData))
   }
 }
 
 export const fetchUser = id => {
   return dispatch => {
-    // const {data} = await axios(`/api/users/${id}`)
-    dispatch(gotUser(dummyData[0]))
+    dispatch(gotUser(dummyData[2]))
   }
 }
 
 const initialState = {
-  users: [],
   user: {}
 }
 

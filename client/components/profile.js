@@ -1,19 +1,19 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchUser} from '../store/profile'
-// import {OneProduct} from './One-Product'
 
 export class Profile extends React.Component {
-  componentDidMount() {
-    this.props.fetchUser(1)
-  }
+  // componentDidMount() {
+  // this.props.fetchUser(this.props.match.params.id)
+  // }
 
   render() {
     console.log('props: ', this.props)
     return (
       <div>
-        <h1>Welcome, {this.props.user.username}!</h1>
-        <h3>email: {this.props.user.email}</h3>
+        <h1>Welcome, {this.props.user.user.username}!</h1>
+        <h3>email: {this.props.user.user.email}</h3>
+        HELLO
       </div>
     )
   }
@@ -25,10 +25,8 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchUser: () => dispatch(fetchUser(1))
-  }
-}
+// const mapDispatchToProps = {
+//     fetchUser: fetchUser,
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect(mapStateToProps, null)(Profile)

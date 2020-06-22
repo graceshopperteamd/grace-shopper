@@ -10,7 +10,8 @@ import {
   ConnectedCart,
   ConnectedCheckout,
   AllProducts,
-  SingleProduct
+  SingleProduct,
+  Profile
 } from './components'
 
 import {me} from './store'
