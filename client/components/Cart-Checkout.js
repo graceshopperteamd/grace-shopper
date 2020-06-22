@@ -4,18 +4,6 @@ import {connect} from 'react-redux'
 import {fetchCart} from '../store/shoppingCart'
 import {checkoutForm} from './Checkout-Form'
 
-export const createCartDiv = cartArray => {
-  return cartArray.map(item => (
-    <div key={item.id} className="cartItems">
-      <img src={item.imageUrl} />
-      <div>
-        <div>Product: {item.name}</div>
-        <div>Price: ${item.price}</div>
-      </div>
-    </div>
-  ))
-}
-
 class Cart extends React.Component {
   constructor(props) {
     super(props)
@@ -53,5 +41,17 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getCart: () => dispatch(fetchCart())
 })
+
+const createCartDiv = cartArray => {
+  return cartArray.map(item => (
+    <div key={item.id} className="cartItems">
+      <img src={item.imageUrl} />
+      <div>
+        <div>Product: {item.name}</div>
+        <div>Price: ${item.price}</div>
+      </div>
+    </div>
+  ))
+}
 
 export const ConnectedCart = connect(mapStateToProps, mapDispatchToProps)(Cart)

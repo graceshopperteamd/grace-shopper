@@ -6,21 +6,32 @@ import {createCartDiv} from './Cart-Checkout'
 import {checkoutForm} from './Checkout-Form'
 import {fetchCart} from '../store/shoppingCart'
 
+const cartProducts = cartArray => {
+  console.log(cartArray)
+  return cartArray.map(item => (
+    <div key={item.id} className="cartItems">
+      <img src={item.imageUrl} />
+      <div>
+        <div>Product: {item.name}</div>
+        <div>Price: ${item.price}</div>
+      </div>
+    </div>
+  ))
+}
+
 class Checkout extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   componentDidMount() {
     this.props.getCart()
   }
 
   render() {
-    console.log('props', this.props)
-    if (this.props.shoppingcart && this.props.shoppingcart.length > 0)
+    const cart = this.props.shoppingCart.products || []
+    console.log('PROPS', this.props)
+    if (this.props.shoppingCart && this.props.shoppingCart.length > 0)
       return (
         <div>
           <h2> Checkout </h2>
-          <div>{createCartDiv(this.props.shoppingcart)}</div>
+          <div>{cartProducts(cart)}</div>
           <div>{checkoutForm}</div>
         </div>
       )
@@ -30,7 +41,7 @@ class Checkout extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    shoppingCart: state.shoppingCart,
+    shoppingCart: state.shoppingcart,
     userId: state.user.id
   }
 }

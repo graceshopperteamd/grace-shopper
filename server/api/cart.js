@@ -4,8 +4,9 @@ const {Cart, Product, CartRelationship} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    const cart = await Cart.findAll()
-    console.log(cart)
+    const cart = await Cart.findAll({
+      include: Product
+    })
     res.json(cart)
   } catch (err) {
     next(err)
