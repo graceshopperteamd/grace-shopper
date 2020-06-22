@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchOneProduct} from '../store/product'
-import {addProductToCart} from '../store/cart'
+import {addProdToCart} from '../store/shoppingCart'
+import {Link} from 'react-router-dom'
 
 class OneProduct extends React.Component {
   constructor() {
@@ -14,32 +15,54 @@ class OneProduct extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
-    const input = Number(document.getElementById('quantity').value)
-    console.log(input)
-    const product = {...this.props.currProduct, amount: input}
-    this.props.addToCart(product)
+    if (this.props.userId) {
+      const quantity = Number(document.getElementById('quantity').value)
+      const product = {
+        ...this.props.currProduct,
+        quantity,
+        userId: this.props.userId
+      }
+      this.props.addProdToCart(product)
+    }
   }
 
   render() {
+    let prodQty = this.props.currProduct.amount
     return (
-      <div>
-        <img src={this.props.currProduct.imageUrl} />
-        <h3>{this.props.currProduct.name}</h3>
-        <p>price: {this.props.currProduct.price}</p>
-        <p>What you're getting: {this.props.currProduct.description}</p>
-
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="quantity">Quantity</label>
-          <input
-            type="number"
-            id="quantity"
-            min="1"
-            max="20"
-            placeholder="quantity"
-          />
-          <br />
-          <button type="submit">Add To Cart</button>
-        </form>
+      // className is for easy acces in css styling later
+      <div className="singleProduct">
+        <main>
+          <h3>{this.props.currProduct.name}</h3>
+          <img src={this.props.currProduct.imageUrl} />
+          <h4>Price: {this.props.currProduct.price}</h4>
+          <p>
+            <b>What does it include?</b> {this.props.currProduct.description}
+          </p>
+        </main>
+        {prodQty === 0 ? (
+          <div>
+            <h3>
+              Sorry for the inconvinience, this item is out of stock for the
+              moment
+            </h3>
+            <Link to="/products">
+              <p>Browse Similar Packages Here</p>
+            </Link>
+          </div>
+        ) : (
+          <form onSubmit={this.handleSubmit}>
+            <label htmlFor="quantity">Quantity</label>
+            <input
+              type="number"
+              id="quantity"
+              min="1"
+              max="20"
+              placeholder="quantity"
+            />
+            <br />
+            <button type="submit">Add To Cart</button>
+          </form>
+        )}
       </div>
     )
   }
@@ -47,14 +70,15 @@ class OneProduct extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    currProduct: state.currProduct
+    currProduct: state.currProduct,
+    userId: state.user.id
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchOneProduct: () => dispatch(fetchOneProduct()),
-    addToCart: obj => dispatch(addProductToCart(obj))
+    fetchOneProduct: id => dispatch(fetchOneProduct(id)),
+    addProdToCart: obj => dispatch(addProdToCart(obj))
   }
 }
 

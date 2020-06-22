@@ -1,14 +1,14 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-var Product = db.define('product', {
+const Product = db.define('product', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true
     },
-    defualtValue: ''
+    defaultValue: ''
   },
   description: {
     type: Sequelize.STRING,
@@ -20,7 +20,7 @@ var Product = db.define('product', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defualtValue: ''
+    defaultValue: ''
   },
   category: {
     type: Sequelize.STRING,
@@ -28,11 +28,11 @@ var Product = db.define('product', {
     validate: {
       notEmpty: true
     },
-    defualtValue: 'General'
+    defaultValue: 'General'
   },
   amount: {
     type: Sequelize.INTEGER,
-    defualtValue: 0
+    defaultValue: 0
   },
   price: {
     type: Sequelize.DOUBLE(4, 2),
@@ -40,7 +40,7 @@ var Product = db.define('product', {
     validate: {
       notEmpty: true
     },
-    defualtValue: 0.0
+    defaultValue: 0.0
   }
 })
 

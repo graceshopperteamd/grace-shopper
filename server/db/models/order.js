@@ -1,20 +1,9 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-var Order = db.define('order', {
-  items: {
-    type: Sequelize.STRING,
-    get: function() {
-      return JSON.parse(this.getDataValue('items'))
-    },
-    set: function(val) {
-      return this.setDataValue('items', JSON.stringify(val))
-    },
-    defualtValue: []
-  },
+const Order = db.define('order', {
   paymentMethod: {
     type: Sequelize.STRING,
-    unique: true,
     allowNull: false,
     validate: {
       notEmpty: true
@@ -33,7 +22,7 @@ var Order = db.define('order', {
     validate: {
       notEmpty: true
     },
-    defualtValue: 0.0
+    defaultValue: 0.0
   }
 })
 

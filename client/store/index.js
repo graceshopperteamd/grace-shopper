@@ -6,10 +6,9 @@ import {cartReducer} from './shoppingCart'
 import user from './user'
 import products from './product'
 import currProduct from './single-product'
-import cart from './cart'
 
 const reducer = combineReducers({
-  user: user,
+  user,
   products,
   currProduct,
   shoppingcart: cartReducer
