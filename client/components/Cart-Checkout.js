@@ -119,7 +119,8 @@ class Checkout extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  shoppingcart: state.shoppingcart
+  shoppingcart: state.shoppingcart,
+  userId: state.userId
 })
 
 const mapDispatchToProps = dispatch => ({

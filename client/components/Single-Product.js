@@ -17,12 +17,16 @@ class OneProduct extends React.Component {
     event.preventDefault()
     if (this.props.userId) {
       const quantity = Number(document.getElementById('quantity').value)
-      const product = {
-        ...this.props.currProduct,
-        quantity,
-        userId: this.props.userId
+
+      if (!quantity) alert('Please input the desired quantity')
+      else {
+        const product = {
+          ...this.props.currProduct,
+          quantity,
+          userId: this.props.userId
+        }
+        this.props.addProdToCart(product)
       }
-      this.props.addProdToCart(product)
     }
   }
 

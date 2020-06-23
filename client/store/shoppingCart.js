@@ -56,8 +56,9 @@ export function cartReducer(state = defaultCart, action) {
     case ADD_TO_CART: {
       return action.product
     }
-    case GOT_CART:
-      return action.shoppingcart
+    case GOT_CART: {
+      return state
+    }
     case CART_ERROR:
       return action.error
     default:
