@@ -1,6 +1,6 @@
 # grace-shopper
 
-Quarantivities
+## Quarantivities Heroku Deployment
 Our Website: https://quarantivities.herokuapp.com/
 
 Group contract: https://docs.google.com/document/d/10bYVZiDEGtDfk-4ZpcsOIatBHaI01xMer3WYo8-FpDU/edit
