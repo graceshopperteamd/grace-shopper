@@ -4,11 +4,18 @@ const {Cart, Product, CartRelationship} = require('../db/models')
 
 router.get('/', async (req, res, next) => {
   try {
-    let cart = await Cart.findOne()
-    if (cart) res.status(200).send(cart)
-    else res.sendStatus(500)
-  } catch (error) {
-    next(error)
+    //     let cart = await Cart.findOne()
+    //     if (cart) res.status(200).send(cart)
+    //     else res.sendStatus(500)
+    //   } catch (error) {
+    //     next(error)
+
+    const cart = await Cart.findAll({
+      include: Product
+    })
+    res.json(cart)
+  } catch (err) {
+    next(err)
   }
 })
 

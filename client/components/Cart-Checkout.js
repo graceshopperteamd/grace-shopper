@@ -66,55 +66,24 @@ class Cart extends React.Component {
   }
 }
 
-// checkout page component
-class Checkout extends React.Component {
-  constructor(props) {
-    super(props)
-    this.createCheckoutDiv = this.createCheckoutDiv.bind(this)
-  }
-  componentDidMount() {
-    this.props.getCart()
-  }
-
-  // factory func maps through all products in shopping cart and creates a component for each
-  createCheckoutDiv(cartArray) {
-    return cartArray.map(item => (
-      <div key={item.id} className="cartItems">
-        <img src={item.imageUrl} />
-        <div>
-          <div>Product: {item.name}</div>
-          <div>Price: ${item.price}</div>
-        </div>
-      </div>
-    ))
-  }
-
-  render() {
-    if (this.props.shoppingcart && this.props.shoppingcart.length > 0)
-      return (
-        <div>
-          <h2> Checkout </h2>
-          <div>{this.createCheckoutDiv(this.props.shoppingcart)}</div>
-          {/* Checkout form component which is imported from /components/Checkout-Form */}
-          <div>{checkoutForm}</div>
-        </div>
-      )
-    else return <div>No items to Checkout</div>
-  }
-}
-
 const mapStateToProps = state => ({
-  shoppingcart: state.shoppingcart,
-  currProduct: state.currProduct,
-  userId: state.userId
+  shoppingcart: state.shoppingcart
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCart: () => dispatch(fetchCart()),
-  handleRemove: () => dispatch(removeItem())
+  getCart: () => dispatch(fetchCart())
 })
 
+const createCartDiv = cartArray => {
+  return cartArray.map(item => (
+    <div key={item.id} className="cartItems">
+      <img src={item.imageUrl} />
+      <div>
+        <div>Product: {item.name}</div>
+        <div>Price: ${item.price}</div>
+      </div>
+    </div>
+  ))
+}
+
 export const ConnectedCart = connect(mapStateToProps, mapDispatchToProps)(Cart)
-export const ConnectedCheckout = connect(mapStateToProps, mapDispatchToProps)(
-  Checkout
-)

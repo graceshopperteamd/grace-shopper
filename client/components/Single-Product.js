@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchOneProduct} from '../store/product'
-import {addProdToCart} from '../store/shoppingCart'
+import {fetchOneProduct} from '../store/single-product'
+import {addProdToCart, AddToCart} from '../store/shoppingCart'
 import {Link} from 'react-router-dom'
 
 class OneProduct extends React.Component {
@@ -10,28 +10,44 @@ class OneProduct extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
+    if (!this.props.userId && !window.localStorage.getItem('guestCart')) {
+      const guestCart = {
+        products: [],
+        totalPrice: 0,
+        totalAmount: 0
+      }
+      window.localStorage.setItem('guestCart', JSON.stringify(guestCart))
+    }
     this.props.fetchOneProduct(this.props.match.params.id)
   }
 
   handleSubmit(event) {
     event.preventDefault()
-    if (this.props.userId) {
-      const quantity = Number(document.getElementById('quantity').value)
 
-      if (!quantity) alert('Please input the desired quantity')
-      else {
-        const product = {
-          ...this.props.currProduct,
-          quantity,
-          userId: this.props.userId
-        }
-        this.props.addProdToCart(product)
+    const quantity = Number(document.getElementById('quantity').value)
+    if (!this.props.userId) {
+      let currCart = JSON.parse(window.localStorage.getItem(`guestCart`))
+      currCart.products.push(this.props.currProduct)
+      currCart.totalPrice += this.props.currProduct.price
+      currCart.totalAmount += quantity
+
+      window.localStorage.setItem('guestCart', JSON.stringify(currCart))
+      alert('Added to Cart')
+    } else {
+      const product = {
+        ...this.props.currProduct,
+        quantity,
+        userId: this.props.userId
+      }
+      if (this.props.addProdToCart(product)) {
+        alert('Added to Cart')
       }
     }
   }
 
   render() {
     let prodQty = this.props.currProduct.amount
+
     return (
       // className is for easy acces in css styling later
       <div className="singleProduct">
@@ -82,7 +98,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchOneProduct: id => dispatch(fetchOneProduct(id)),
-    addProdToCart: (obj, userId) => dispatch(addProdToCart(obj, userId))
+    addProdToCart: obj => dispatch(addProdToCart(obj)),
+    addToCart: obj => dispatch(AddToCart(obj))
   }
 }
 

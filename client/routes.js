@@ -4,6 +4,7 @@ import {withRouter, Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import {
+  HomePage,
   Login,
   Signup,
   UserHome,
@@ -14,7 +15,6 @@ import {
 } from './components'
 
 import {me} from './store'
-import {HomePage} from './components/homepage'
 
 /**
  * COMPONENT
@@ -40,6 +40,7 @@ class Routes extends Component {
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route exact path="/home" component={UserHome} />
+            <Route exact path="/" component={UserHome} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}

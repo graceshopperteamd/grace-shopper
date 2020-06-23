@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
+
 const CART_ERROR = 'CART_ERROR'
 const EDIT_CART = 'EDIT_CART'
 const DELETE_ITEM = 'DELETE_ITEM'
@@ -68,13 +69,24 @@ export const removeItem = singleProduct => {
 export const fetchCart = () => {
   return async dispatch => {
     try {
-      //eventually get cart data from DB, for now use dummy data
       const {data} = await axios.get('/api/cart')
-      if (data) {
-        dispatch(gotCart(data))
-      }
+
+      dispatch(gotCart(data))
     } catch (error) {
       dispatch(cartErrorAction(error))
+    }
+  }
+}
+
+export const makeOrder = order => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/order', order)
+      if (data) {
+        dispatch(placeOrder(data))
+      }
+    } catch (error) {
+      dispatch(orderErrorAction(error))
     }
   }
 }
