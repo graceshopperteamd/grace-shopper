@@ -5,6 +5,8 @@ import {addProdToCart} from '../store/shoppingCart'
 import {AddToCart} from '../store/shoppingCart'
 import {Link} from 'react-router-dom'
 
+const getGuestCart = () => {}
+
 class OneProduct extends React.Component {
   constructor() {
     super()
@@ -18,7 +20,12 @@ class OneProduct extends React.Component {
     event.preventDefault()
     const quantity = Number(document.getElementById('quantity').value)
     if (!this.props.userId) {
-      this.props.addToCart({...this.props.currProduct, quantity})
+      let currCart = JSON.parse(window.localStorage.getItem(`guestCart`))
+      currCart.products.push(this.props.currProduct)
+      currCart.totalPrice += this.props.currProduct.price
+      currCart.totalAmount += quantity
+
+      window.localStorage.setItem('guestCart', JSON.stringify(currCart))
       alert('Added to Cart')
     }
     if (this.props.userId) {

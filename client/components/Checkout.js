@@ -13,7 +13,7 @@ const cartProducts = (cartArray = []) => {
       <div>
         <div>Product: {item.name}</div>
         <div>Price: ${item.price}</div>
-        <div>Quantity: {item.CartProducts.itemAmount}</div>
+        {/* <div>Quantity: {item.CartProducts.itemAmount || 1}</div> */}
       </div>
     </div>
   ))
@@ -65,7 +65,13 @@ class Checkout extends React.Component {
   }
 
   render() {
-    const prodsInCart = this.props.shoppingCart[0]
+    let prodsInCart = this.props.shoppingCart[0]
+    console.log('logged in', prodsInCart)
+
+    if (!this.props.userId) {
+      prodsInCart = JSON.parse(window.localStorage.getItem(`guestCart`))
+      console.log('PRODS', prodsInCart.products)
+    }
     if (this.props.order.id) {
       return (
         <div>
@@ -73,7 +79,7 @@ class Checkout extends React.Component {
         </div>
       )
     }
-    if (this.props.shoppingCart && this.props.shoppingCart.length > 0) {
+    if (prodsInCart.products) {
       return (
         <div>
           <h2> Checkout </h2>

@@ -6,8 +6,15 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export class HomePage extends React.Component {
-  constructor() {
-    super()
+  componentDidMount() {
+    if (!this.props.userId) {
+      const guestCart = {
+        products: [],
+        totalPrice: 0,
+        totalAmount: 0
+      }
+      window.localStorage.setItem('guestCart', JSON.stringify(guestCart))
+    }
   }
 
   render() {
