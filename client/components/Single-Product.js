@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchOneProduct} from '../store/single-product'
 import {addProdToCart} from '../store/shoppingCart'
+import {AddToCart} from '../store/shoppingCart'
 import {Link} from 'react-router-dom'
 
 class OneProduct extends React.Component {
@@ -15,8 +16,12 @@ class OneProduct extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+    const quantity = Number(document.getElementById('quantity').value)
+    if (!this.props.userId) {
+      this.props.addToCart({...this.props.currProduct, quantity})
+      alert('Added to Cart')
+    }
     if (this.props.userId) {
-      const quantity = Number(document.getElementById('quantity').value)
       const product = {
         ...this.props.currProduct,
         quantity,
@@ -80,7 +85,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchOneProduct: id => dispatch(fetchOneProduct(id)),
-    addProdToCart: obj => dispatch(addProdToCart(obj))
+    addProdToCart: obj => dispatch(addProdToCart(obj)),
+    addToCart: obj => dispatch(AddToCart(obj))
   }
 }
 

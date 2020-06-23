@@ -12,9 +12,6 @@ router.post('/', async (req, res, next) => {
     }
     const newOrder = await Order.create(orderToBePlaced)
     req.body.shoppingCart[0].products.forEach(async prod => {
-      //   if (prod.amount < prod.CartProducts.itemAmount) { put it in getCart
-      //     res.send("Not enough product")
-      //   }
       const currProduct = await Product.findByPk(prod.id)
       newOrder.addProduct(currProduct.id, {
         through: {
