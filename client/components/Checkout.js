@@ -66,7 +66,7 @@ class Checkout extends React.Component {
 
   render() {
     const prodsInCart = this.props.shoppingCart[0]
-    if (this.props.order.id && this.props.shoppingCart.length === 0) {
+    if (this.props.order.id) {
       return (
         <div>
           <OrderCompleteMessage />
