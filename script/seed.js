@@ -3,7 +3,6 @@
 const db = require('../server/db')
 const {User, Product, Order, Relationship} = require('../server/db/models')
 const faker = require('faker')
-// const {use} = require('chai')
 
 const DUMMY_DATA_AMOUNT = 100
 
@@ -16,6 +15,15 @@ for (let i = 0; i < DUMMY_DATA_AMOUNT; i++) {
   const user = {username, email, password}
   users.push(user)
 }
+
+// test admin user
+const testAdmin = {
+  role: 'admin',
+  username: `Juan`,
+  email: `juan@gmail.com`,
+  password: `qwerty`
+}
+users.push(testAdmin)
 
 const items = []
 
