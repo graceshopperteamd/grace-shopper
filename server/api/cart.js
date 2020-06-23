@@ -6,7 +6,6 @@ const {Cart, Product, CartRelationship} = require('../db/models')
 router.get('/', async (req, res, next) => {
   try {
     let cart = await Cart.findOne()
-
     if (cart) res.status(200).send(cart)
     else res.sendStatus(500)
   } catch (error) {
@@ -64,7 +63,11 @@ router.put('/edit', async (req, res, next) => {
       res.status(400)
     }
 
-    let currCart = await Cart.findOne()
+    let currCart = await Cart.findOne({
+      where: {
+        userId: req.body.userId
+      }
+    })
     if (!currCart) {
       currCart = await Cart.create({
         userId: req.body.userId

@@ -3,29 +3,17 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/shoppingCart'
 import {checkoutForm} from './Checkout-Form'
+import {ConnectedQtyForm} from './Quantity-Change-Form'
 
 // cart page component
 class Cart extends React.Component {
   constructor(props) {
     super(props)
     this.createCartDiv = this.createCartDiv.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
   }
   componentDidMount() {
     this.props.getCart()
-  }
-
-  // console.log('',);
-
-  handleSubmit(event) {
-    let qty = document.getElementById('cartQty').value
-    console.log('qty', qty)
-
-    if (!qty) alert('Please indicate the qty of items you wish to add')
-    else {
-      alert('submit', {event})
-    }
   }
 
   handleRemove(event) {
@@ -42,18 +30,7 @@ class Cart extends React.Component {
           <div>Price: ${item.price}</div>
         </div>
         <div>
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="cartQty">Quantity</label>
-            <input
-              type="number"
-              id="cartQty"
-              min="1"
-              max="20"
-              placeholder="Qty"
-            />
-            <br />
-            <button type="submit">Add To Cart</button>
-          </form>
+          <ConnectedQtyForm item={item} />
           <button onClick={this.handleRemove}>Remove</button>
         </div>
       </div>
