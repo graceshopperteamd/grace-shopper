@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchProducts} from '../store/product'
+import {fetchProducts, deleteProduct} from '../store/product'
 import {OneProduct} from './One-Product'
 
 class AdminDashboard extends React.Component {
@@ -12,9 +12,15 @@ class AdminDashboard extends React.Component {
     return (
       <div>
         <h2>Welcome Admin!</h2>
-        {/* {this.props.products.map((product) => (
-          <OneProduct key={product.id} product={product} />
-        ))} */}
+        {this.props.products.map(product => (
+          <div key={product.id}>
+            <OneProduct product={product} />
+            <button onClick={() => this.props.removeProduct(product.id)}>
+              X
+            </button>
+            <hr />
+          </div>
+        ))}
       </div>
     )
   }
@@ -28,7 +34,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    fetchProducts: () => dispatch(fetchProducts()),
+    removeProduct: productId => dispatch(deleteProduct(productId))
   }
 }
 
