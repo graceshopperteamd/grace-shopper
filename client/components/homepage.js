@@ -6,8 +6,15 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export class HomePage extends React.Component {
-  constructor() {
-    super()
+  componentDidMount() {
+    if (!this.props.userId) {
+      const guestCart = {
+        products: [],
+        totalPrice: 0,
+        totalAmount: 0
+      }
+      window.localStorage.setItem('guestCart', JSON.stringify(guestCart))
+    }
   }
 
   render() {
@@ -24,21 +31,3 @@ export class HomePage extends React.Component {
     )
   }
 }
-
-/**
- * CONTAINER
- */
-//   const mapState = state => {
-//     return {
-//       email: state.user.email
-//     }
-//   }
-
-//   export default connect(mapState)(UserHome)
-
-/**
- * PROP TYPES
- */
-//   UserHome.propTypes = {
-//     email: PropTypes.string
-//   }
