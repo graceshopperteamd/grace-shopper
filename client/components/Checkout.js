@@ -1,5 +1,4 @@
 import React from 'react'
-import {Redirect} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {CheckoutForm} from './Checkout-Form'
 import {fetchCart} from '../store/shoppingCart'
@@ -31,11 +30,17 @@ class Checkout extends React.Component {
 
   componentDidMount() {
     this.props.getCart()
+    if (this.props.userId) {
+      window.localStorage.clear()
+    }
   }
 
   // eslint-disable-next-line complexity
   handleSubmit(evt) {
     event.preventDefault()
+    if (!this.props.userId) {
+      return alert('Please login or signup')
+    }
     if (
       evt.target.streetAddress.value === '' ||
       evt.target.aptNum.value === '' ||
@@ -70,11 +75,8 @@ class Checkout extends React.Component {
 
   render() {
     let prodsInCart = this.props.shoppingCart[0]
-    console.log('logged in', prodsInCart)
-
     if (!this.props.userId) {
       prodsInCart = JSON.parse(window.localStorage.getItem(`guestCart`))
-      console.log('PRODS', prodsInCart.products)
     }
     if (this.props.order.id) {
       return (
@@ -83,7 +85,7 @@ class Checkout extends React.Component {
         </div>
       )
     }
-    if (prodsInCart.products) {
+    if (prodsInCart) {
       return (
         <div>
           <h2> Checkout </h2>

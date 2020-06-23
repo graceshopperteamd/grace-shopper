@@ -1,11 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {fetchOneProduct} from '../store/single-product'
-import {addProdToCart} from '../store/shoppingCart'
-import {AddToCart} from '../store/shoppingCart'
+import {addProdToCart, AddToCart} from '../store/shoppingCart'
 import {Link} from 'react-router-dom'
-
-const getGuestCart = () => {}
 
 class OneProduct extends React.Component {
   constructor() {
@@ -13,11 +10,20 @@ class OneProduct extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
+    if (!this.props.userId && !window.localStorage.getItem('guestCart')) {
+      const guestCart = {
+        products: [],
+        totalPrice: 0,
+        totalAmount: 0
+      }
+      window.localStorage.setItem('guestCart', JSON.stringify(guestCart))
+    }
     this.props.fetchOneProduct(this.props.match.params.id)
   }
 
   handleSubmit(event) {
     event.preventDefault()
+
     const quantity = Number(document.getElementById('quantity').value)
     if (!this.props.userId) {
       let currCart = JSON.parse(window.localStorage.getItem(`guestCart`))
@@ -27,8 +33,7 @@ class OneProduct extends React.Component {
 
       window.localStorage.setItem('guestCart', JSON.stringify(currCart))
       alert('Added to Cart')
-    }
-    if (this.props.userId) {
+    } else {
       const product = {
         ...this.props.currProduct,
         quantity,
@@ -42,6 +47,7 @@ class OneProduct extends React.Component {
 
   render() {
     let prodQty = this.props.currProduct.amount
+
     return (
       // className is for easy acces in css styling later
       <div className="singleProduct">
