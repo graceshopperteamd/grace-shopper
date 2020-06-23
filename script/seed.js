@@ -3,7 +3,6 @@
 const db = require('../server/db')
 const {User, Product, Order, Relationship} = require('../server/db/models')
 const faker = require('faker')
-// const {use} = require('chai')
 
 const DUMMY_DATA_AMOUNT = 100
 
@@ -11,11 +10,20 @@ const users = []
 
 for (let i = 0; i < DUMMY_DATA_AMOUNT; i++) {
   const username = `${faker.name.firstName()} ${faker.name.lastName()}`
-  const email = `{faker.lorem.word()}@${faker.lorem.word()}.com`
+  const email = `${faker.internet.email()}`
   const password = `${faker.lorem.words(3)}`
   const user = {username, email, password}
   users.push(user)
 }
+
+// test admin user
+const testAdmin = {
+  role: 'admin',
+  username: `Juan`,
+  email: `juan@gmail.com`,
+  password: `qwerty`
+}
+users.push(testAdmin)
 
 const items = []
 

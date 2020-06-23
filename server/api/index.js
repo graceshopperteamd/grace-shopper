@@ -1,6 +1,10 @@
+const {route} = require('./users')
+
 const router = require('express').Router()
+const {authRole} = require('../authenticate')
 module.exports = router
 
+// router.use('/', )
 router.use('/users', require('./users'))
 router.use('/products', require('./products'))
 router.use('/cart', require('./cart'))
