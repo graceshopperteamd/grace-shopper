@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import {
   Login,
   Signup,
-  UserHome,
+  Profile,
   ConnectedCart,
   ConnectedCheckout,
   AllProducts,
@@ -39,7 +39,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route exact path="/home" component={UserHome} />
+            <Route exact path="/profile" component={Profile} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
