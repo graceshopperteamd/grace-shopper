@@ -2,6 +2,7 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchCart} from '../store/shoppingCart'
+import {removeItem} from '../store/shoppingCart'
 import {checkoutForm} from './Checkout-Form'
 import {ConnectedQtyForm} from './Quantity-Change-Form'
 
@@ -101,7 +102,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCart: () => dispatch(fetchCart())
+  getCart: () => dispatch(fetchCart()),
+  handleRemove: () => dispatch(removeItem())
 })
 
 export const ConnectedCart = connect(mapStateToProps, mapDispatchToProps)(Cart)

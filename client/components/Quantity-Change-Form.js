@@ -20,14 +20,13 @@ class QtyForm extends React.Component {
 
     const product = {
       target: event.target.id,
-      qty: this.value,
-      userId: this.props.userId
+      qty: this.state.value,
+      userId: this.state.userId
     }
     if (!product.qty)
       alert('Please indicate the qty of items you wish to have in your cart')
     else {
       editCart(product)
-      alert('submit', {event})
     }
   }
 

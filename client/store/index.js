@@ -14,6 +14,12 @@ const reducer = combineReducers({
   shoppingcart: cartReducer
 })
 
+/*
+shoppingcart: {
+  info: {},
+  products: [{},{},{}]
+} */
+
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )

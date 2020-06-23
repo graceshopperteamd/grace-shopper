@@ -6,6 +6,8 @@ import axios from 'axios'
 const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
 const CART_ERROR = 'CART_ERROR'
+const EDIT_CART = 'EDIT_CART'
+const DELETE_ITEM = 'DELETE_ITEM'
 
 /**
  * INITIAL STATE
@@ -17,6 +19,8 @@ const defaultCart = []
  */
 export const AddToCart = product => ({type: ADD_TO_CART, product})
 const gotCart = shoppingcart => ({type: GOT_CART, shoppingcart})
+const editedCart = shoppingcart => ({type: EDIT_CART, shoppingcart})
+const removedItem = shoppingcart => ({type: DELETE_ITEM, shoppingcart})
 const cartErrorAction = error => ({type: CART_ERROR, error})
 /**
  * THUNK CREATORS
@@ -40,7 +44,20 @@ export const editCart = singleProduct => {
     try {
       const {data} = await axios.put('/api/cart/edit', singleProduct)
       if (data) {
-        dispatch(editCart(data))
+        dispatch(editedCart(data))
+      }
+    } catch (error) {
+      dispatch(cartErrorAction(error))
+    }
+  }
+}
+
+export const removeItem = singleProduct => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.delete('/api/cart/edit', singleProduct)
+      if (data) {
+        dispatch(removedItem(data))
       }
     } catch (error) {
       dispatch(cartErrorAction(error))
@@ -71,6 +88,12 @@ export function cartReducer(state = defaultCart, action) {
     }
     case GOT_CART: {
       return state
+    }
+    case EDIT_CART: {
+      return action.product
+    }
+    case DELETE_ITEM: {
+      return action.product
     }
     case CART_ERROR:
       return action.error
