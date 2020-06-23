@@ -13,7 +13,11 @@ const cartProducts = (cartArray = []) => {
       <div>
         <div>Product: {item.name}</div>
         <div>Price: ${item.price}</div>
-        {/* <div>Quantity: {item.CartProducts.itemAmount || 1}</div> */}
+        {item.CartProducts ? (
+          <div>Quantity: {item.CartProducts.itemAmount}</div>
+        ) : (
+          ''
+        )}
       </div>
     </div>
   ))
