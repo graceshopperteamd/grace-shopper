@@ -15,7 +15,7 @@ const cartProducts = (cartArray = []) => {
         {item.CartProducts ? (
           <div>Quantity: {item.CartProducts.itemAmount}</div>
         ) : (
-          ''
+          <div>Quantity: {item.quantity}</div>
         )}
       </div>
     </div>

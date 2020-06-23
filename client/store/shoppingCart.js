@@ -48,6 +48,19 @@ export const fetchCart = () => {
   }
 }
 
+export const fetchCartForId = id => {
+  return async dispatch => {
+    try {
+      console.log('ID', id)
+      const {data} = await axios.post('/api/cart', id)
+
+      dispatch(gotCart(data))
+    } catch (error) {
+      dispatch(cartErrorAction(error))
+    }
+  }
+}
+
 export const makeOrder = order => {
   return async dispatch => {
     try {
