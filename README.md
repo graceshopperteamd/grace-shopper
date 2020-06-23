@@ -3,6 +3,7 @@
 ## Quarantivities Heroku Deployment
 Our Website: https://quarantivities.herokuapp.com/
 
+## Important Documents
 Group contract: https://docs.google.com/document/d/10bYVZiDEGtDfk-4ZpcsOIatBHaI01xMer3WYo8-FpDU/edit
 
 Prototype: https://framer.com/share/Grace-Shopper-Prototype-yrlLlke8Ljk5Zf3W0KdU
