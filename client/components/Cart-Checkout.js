@@ -34,27 +34,13 @@ class Cart extends React.Component {
   }
 }
 
-class Checkout extends React.Component {
-  constructor(props) {
-    super(props)
-  }
+const mapStateToProps = state => ({
+  shoppingcart: state.shoppingcart
+})
 
-  componentDidMount() {
-    this.props.getCart()
-  }
-
-  render() {
-    if (this.props.shoppingcart && this.props.shoppingcart.length > 0)
-      return (
-        <div>
-          <h2> Checkout </h2>
-          <div>{createCartDiv(this.props.shoppingcart)}</div>
-          <div>{checkoutForm}</div>
-        </div>
-      )
-    else return <div>No items to Checkout</div>
-  }
-}
+const mapDispatchToProps = dispatch => ({
+  getCart: () => dispatch(fetchCart())
+})
 
 const createCartDiv = cartArray => {
   return cartArray.map(item => (
@@ -68,15 +54,4 @@ const createCartDiv = cartArray => {
   ))
 }
 
-const mapStateToProps = state => ({
-  shoppingcart: state.shoppingcart
-})
-
-const mapDispatchToProps = dispatch => ({
-  getCart: () => dispatch(fetchCart())
-})
-
 export const ConnectedCart = connect(mapStateToProps, mapDispatchToProps)(Cart)
-export const ConnectedCheckout = connect(mapStateToProps, mapDispatchToProps)(
-  Checkout
-)
