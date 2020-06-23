@@ -11,14 +11,21 @@ class Cart extends React.Component {
   constructor(props) {
     super(props)
     this.createCartDiv = this.createCartDiv.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
   componentDidMount() {
     this.props.getCart()
   }
 
-  handleRemove(event) {
-    alert('remove', {event})
+  handleClick(event) {
+    event.preventDefault()
+
+    const product = {
+      id: this.props.currProduct.id,
+      userId: this.props.userId
+    }
+    console.log(product.id)
+    this.props.handleRemove(product)
   }
 
   // factory func maps through all products in shopping cart and creates a component for each
@@ -32,7 +39,7 @@ class Cart extends React.Component {
         </div>
         <div>
           <ConnectedQtyForm item={item} />
-          <button onClick={this.handleRemove}>Remove</button>
+          <button onClick={this.handleClick}>Remove</button>
         </div>
       </div>
     ))
@@ -98,6 +105,7 @@ class Checkout extends React.Component {
 
 const mapStateToProps = state => ({
   shoppingcart: state.shoppingcart,
+  currProduct: state.currProduct,
   userId: state.userId
 })
 

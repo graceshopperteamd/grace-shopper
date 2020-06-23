@@ -18,9 +18,9 @@ const defaultCart = []
  * ACTION CREATORS
  */
 export const AddToCart = product => ({type: ADD_TO_CART, product})
-const gotCart = shoppingcart => ({type: GOT_CART, shoppingcart})
-const editedCart = shoppingcart => ({type: EDIT_CART, shoppingcart})
-const removedItem = shoppingcart => ({type: DELETE_ITEM, shoppingcart})
+const gotCart = payload => ({type: GOT_CART, payload})
+const editedCart = payload => ({type: EDIT_CART, payload})
+const removedItem = payload => ({type: DELETE_ITEM, payload})
 const cartErrorAction = error => ({type: CART_ERROR, error})
 /**
  * THUNK CREATORS
@@ -69,9 +69,10 @@ export const fetchCart = () => {
   return async dispatch => {
     try {
       //eventually get cart data from DB, for now use dummy data
-      let {data} = await axios.get('/api/cart')
-
-      dispatch(gotCart(data))
+      const {data} = await axios.get('/api/cart')
+      if (data) {
+        dispatch(gotCart(data))
+      }
     } catch (error) {
       dispatch(cartErrorAction(error))
     }
@@ -87,13 +88,13 @@ export function cartReducer(state = defaultCart, action) {
       return action.product
     }
     case GOT_CART: {
-      return state
+      return state.payload
     }
     case EDIT_CART: {
-      return action.product
+      return action.payload
     }
     case DELETE_ITEM: {
-      return action.product
+      return action.payload
     }
     case CART_ERROR:
       return action.error
