@@ -23,4 +23,17 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+router.delete('/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId
+    if (!productId) {
+      throw Error('Something went wrong!')
+    }
+    await Product.destroy({where: {id: productId}})
+    res.end()
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router
