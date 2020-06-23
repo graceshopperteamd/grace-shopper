@@ -11,7 +11,7 @@ const users = []
 
 for (let i = 0; i < DUMMY_DATA_AMOUNT; i++) {
   const username = `${faker.name.firstName()} ${faker.name.lastName()}`
-  const email = `{faker.lorem.word()}@${faker.lorem.word()}.com`
+  const email = `${faker.internet.email()}`
   const password = `${faker.lorem.words(3)}`
   const user = {username, email, password}
   users.push(user)
