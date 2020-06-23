@@ -5,6 +5,7 @@ import axios from 'axios'
  */
 const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
+
 const CART_ERROR = 'CART_ERROR'
 
 /**
@@ -43,6 +44,19 @@ export const fetchCart = () => {
       dispatch(gotCart(data))
     } catch (error) {
       dispatch(cartErrorAction(error))
+    }
+  }
+}
+
+export const makeOrder = order => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/order', order)
+      if (data) {
+        dispatch(placeOrder(data))
+      }
+    } catch (error) {
+      dispatch(orderErrorAction(error))
     }
   }
 }

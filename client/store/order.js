@@ -4,7 +4,7 @@ const PLACE_ORDER = 'PLACE_ORDER'
 const ORDER_ERROR = 'ORDER_ERROR'
 
 const placeOrder = order => ({type: PLACE_ORDER, order})
-const orderErrorAction = error => ({type: ORDER_ERROR, error})
+const orderErrorAction = error => ({type: CART_ERROR, error})
 
 export const makeOrder = order => {
   return async dispatch => {

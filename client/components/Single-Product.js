@@ -22,7 +22,9 @@ class OneProduct extends React.Component {
         quantity,
         userId: this.props.userId
       }
-      this.props.addProdToCart(product)
+      if (this.props.addProdToCart(product)) {
+        alert('Added to Cart')
+      }
     }
   }
 
