@@ -75,9 +75,9 @@ class Checkout extends React.Component {
 
   render() {
     let prodsInCart = this.props.shoppingCart[0]
-    // if (!this.props.userId) {
-    //   prodsInCart = JSON.parse(window.localStorage.getItem(`guestCart`))
-    // }
+    if (!this.props.userId) {
+      prodsInCart = JSON.parse(window.localStorage.getItem(`guestCart`))
+    }
     if (this.props.order.id) {
       return (
         <div>
