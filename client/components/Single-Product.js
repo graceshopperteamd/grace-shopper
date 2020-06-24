@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {fetchOneProduct} from '../store/single-product'
 import {addProdToCart, AddToCart} from '../store/shoppingCart'
 import {Link} from 'react-router-dom'
+import {Card, Button, Badge} from 'react-bootstrap'
 
 class OneProduct extends React.Component {
   constructor() {
@@ -64,32 +65,36 @@ class OneProduct extends React.Component {
     return (
       // className is for easy acces in css styling later
       <div className="singleProduct">
-        <main>
-          <h3>{this.props.currProduct.name}</h3>
-          <img src={this.props.currProduct.imageUrl} />
-          <h4>Price: ${this.props.currProduct.price}</h4>
-          <p>
-            <b>What does it include?</b> {this.props.currProduct.description}
-          </p>
-        </main>
-        {prodQty === 0 ? (
-          <div>
-            <h3>
-              Sorry for the inconvenience, this item is out of stock for the
-              moment
-            </h3>
-            <Link to="/products">
-              <p>Browse Similar Packages Here</p>
-            </Link>
-          </div>
-        ) : (
-          <form onSubmit={this.handleSubmit}>
-            <label htmlFor="quantity">Quantity</label>
-            <input type="number" id="quantity" min="1" max="20" />
-            <br />
-            <button type="submit">Add To Cart</button>
-          </form>
-        )}
+        <Card bg="ligth" text="dark" style={{width: '30rem'}}>
+          <Card.Body>
+            <Card.Title>{this.props.currProduct.name}</Card.Title>
+            <Card.Img src={this.props.currProduct.imageUrl} />
+            <Card.Text>Price: ${this.props.currProduct.price}</Card.Text>
+            <Card.Text>
+              <b>What does it include?</b> {this.props.currProduct.description}
+            </Card.Text>
+            {prodQty === 0 ? (
+              <div>
+                <Card.Text>
+                  Sorry for the inconvenience, this item is out of stock for the
+                  moment
+                </Card.Text>
+                <Link to="/products">
+                  <Card.Footer>Browse Similar Packages Here</Card.Footer>
+                </Link>
+              </div>
+            ) : (
+              <form onSubmit={this.handleSubmit}>
+                <label htmlFor="quantity">Quantity</label>
+                <input type="number" id="quantity" min="1" max="20" />
+                <br />
+                <Button type="submit" size="sm" variant="danger">
+                  Add To Cart
+                </Button>
+              </form>
+            )}
+          </Card.Body>
+        </Card>
       </div>
     )
   }

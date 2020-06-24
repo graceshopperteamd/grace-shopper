@@ -3,37 +3,38 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
+import {Navbar as NavBar, Nav} from 'react-bootstrap'
 
 const Navbar = ({handleClick, isLoggedIn}) => (
-  <div>
-    <h1>QUARANTIVITIES</h1>
-    <nav>
-      {isLoggedIn ? (
-        <div>
-          {/* The navbar will show these links after you log in */}
-          <Link to="/home">Home</Link>
-          <Link to="/products">All Our Products</Link>
-          <Link to="/myAccount">My Account</Link>
-          <Link to="/cart">Cart</Link>
-          <Link to="/checkout">Checkout</Link>
-          <a href="#" onClick={handleClick}>
-            Logout
-          </a>
-        </div>
-      ) : (
-        <div>
-          {/* The navbar will show these links before you log in */}
-          <Link to="/">Home</Link>
-          <Link to="/products">All Our Products</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/cart">Cart</Link>
-          <Link to="/checkout">Checkout</Link>
-        </div>
-      )}
-    </nav>
-    <hr />
-  </div>
+  <NavBar bg="danger" variant="dark" expand="lg">
+    <NavBar.Brand>QUARANTIVITIES</NavBar.Brand>
+    <br />
+    {isLoggedIn ? (
+      <Nav className="mr-auto">
+        {/* The navbar will show these links after you log in */}
+
+        <Nav.Link href="/home">Home</Nav.Link>
+        <Nav.Link href="/products">All Our Products</Nav.Link>
+        <Nav.Link href="/myAccount">My Account</Nav.Link>
+        <Nav.Link href="/cart">Cart</Nav.Link>
+        <Nav.Link href="/checkout">Checkout</Nav.Link>
+        <Nav.Link href="#" onClick={handleClick}>
+          Logout
+        </Nav.Link>
+      </Nav>
+    ) : (
+      <Nav className="mr-auto">
+        {/* The navbar will show these links before you log in */}
+
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/products">All Our Products</Nav.Link>
+        <Nav.Link href="/login">Login</Nav.Link>
+        <Nav.Link href="/signup">Sign Up</Nav.Link>
+        <Nav.Link href="/cart">Cart</Nav.Link>
+        <Nav.Link href="/checkout">Checkout</Nav.Link>
+      </Nav>
+    )}
+  </NavBar>
 )
 
 /**

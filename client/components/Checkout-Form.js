@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
+import {Button} from 'react-bootstrap'
 
 export const CheckoutForm = props => {
   return (
@@ -69,11 +70,15 @@ export const CheckoutForm = props => {
         </div>
 
         <div className="CheckoutPageBtns">
-          <Link to="/">
+          <Link to="/products">
             {' '}
-            <button type="button">Back to Browse</button>{' '}
+            <Button type="button" variant="danger" size="sm">
+              Back to Browse
+            </Button>{' '}
           </Link>
-          <button type="submit">Finish Checking Out</button>
+          <Button type="submit" variant="danger" size="sm">
+            Finish Checking Out
+          </Button>
         </div>
       </form>
     </div>
