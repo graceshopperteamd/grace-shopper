@@ -78,14 +78,19 @@ class Checkout extends React.Component {
     if (!this.props.userId) {
       prodsInCart = JSON.parse(window.localStorage.getItem(`guestCart`))
     }
-    if (this.props.order.id) {
+
+    if (this.props.order && !this.props.shoppingCart[0]) {
       return (
         <div>
           <OrderCompleteMessage />
         </div>
       )
-    }
-    if (prodsInCart) {
+    } else if (
+      prodsInCart &&
+      prodsInCart.products &&
+      prodsInCart.products.length > 0
+    ) {
+      console.log('PRODS', prodsInCart)
       return (
         <div>
           <h2> Checkout </h2>
