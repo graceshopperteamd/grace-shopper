@@ -3,6 +3,7 @@ import axios from 'axios'
 const GET_ALL_PRODUCTS = 'GET_ALL_PRODUCTS'
 const GET_ONE_PRODUCT = 'GET_ONE_PRODUCT'
 const REMOVE_ONE_PRODUCT = 'REMOVE_ONE_PRODUCT'
+const UPDATE_QTY = 'UPDATE_QTY'
 
 const gotProducts = products => {
   return {
@@ -23,6 +24,11 @@ const removeProduct = productId => ({
   productId
 })
 
+const updateQty = product => ({
+  type: UPDATE_QTY,
+  product
+})
+
 export const fetchProducts = () => {
   return async dispatch => {
     const {data} = await axios('/api/products')
@@ -37,6 +43,22 @@ export const deleteProduct = productId => {
   }
 }
 
+export const updateProductQty = (productId, qty) => {
+  return async dispatch => {
+    // const {data} = await axios(`/api/products/${productId}`)
+    // console.log('data', qty)
+    // console.log(data)
+    const newQty = parseInt(qty)
+    console.log(newQty)
+    // problem is updatedProduct, there is something wrong with the put request
+    const updatedProduct = await axios.put(`/api/products/${productId}`, {
+      productId,
+      amount: newQty
+    })
+    dispatch(updateQty(updatedProduct))
+  }
+}
+
 const products = []
 
 export default function productsReducer(state = products, action) {
@@ -46,8 +68,11 @@ export default function productsReducer(state = products, action) {
     }
     case REMOVE_ONE_PRODUCT: {
       console.log('action', action)
-      console.log('state', state)
       return state.filter(product => product.id !== action.productId)
+    }
+    case UPDATE_QTY: {
+      console.log('state', state)
+      return {...state, amount: action.qty}
     }
     default:
       return state
