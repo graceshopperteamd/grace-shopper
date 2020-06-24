@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/product'
 import {OneProduct} from './One-Product'
+import {Container, CardColumns} from 'react-bootstrap'
 
 class AllProducts extends React.Component {
   componentDidMount() {
@@ -11,10 +12,14 @@ class AllProducts extends React.Component {
   render() {
     return (
       <div>
-        <h2>Our Packages!</h2>
-        {this.props.products.map(product => (
-          <OneProduct key={product.id} product={product} />
-        ))}
+        <br />
+        <h3>Our Packages:</h3>
+        <br />
+        <CardColumns>
+          {this.props.products.map(product => (
+            <OneProduct key={product.id} product={product} />
+          ))}
+        </CardColumns>
       </div>
     )
   }

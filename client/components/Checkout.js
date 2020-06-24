@@ -29,8 +29,8 @@ class Checkout extends React.Component {
   }
 
   componentDidMount() {
+    this.props.getCart()
     if (this.props.userId) {
-      this.props.getCart()
       window.localStorage.clear()
     }
   }
@@ -79,21 +79,19 @@ class Checkout extends React.Component {
       prodsInCart = JSON.parse(window.localStorage.getItem(`guestCart`))
     }
 
-    if (this.props.order && !this.props.shoppingCart[0]) {
+    if (this.props.order && !prodsInCart) {
       return (
         <div>
           <OrderCompleteMessage />
         </div>
       )
-    } else if (
-      prodsInCart &&
-      prodsInCart.products &&
-      prodsInCart.products.length > 0
-    ) {
+    }
+    if (prodsInCart && prodsInCart.products) {
       console.log('PRODS', prodsInCart)
       return (
         <div>
-          <h2> Checkout </h2>
+          <br />
+          <h3> Checkout </h3>
           <div>{cartProducts(prodsInCart.products)}</div>
           <p> Total items: {prodsInCart.totalAmount}</p>
           <p>Your Total: $ {prodsInCart.totalPrice}</p>

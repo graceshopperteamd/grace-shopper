@@ -20,7 +20,8 @@ export class HomePage extends React.Component {
   render() {
     return (
       <div>
-        <h3>Hello Bored Person!</h3>
+        <br />
+        <h4>Hello Bored Person!</h4>
         <p>
           Please take a look around our website to find the best fun-activites
           for you to do at home with roommates, friends, family, your cat or by
