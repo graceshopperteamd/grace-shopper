@@ -17,8 +17,9 @@ class OneProduct extends React.Component {
         totalAmount: 0
       }
       window.localStorage.setItem('guestCart', JSON.stringify(guestCart))
+    } else {
+      this.props.fetchOneProduct(this.props.match.params.id)
     }
-    this.props.fetchOneProduct(this.props.match.params.id)
   }
 
   handleSubmit(event) {

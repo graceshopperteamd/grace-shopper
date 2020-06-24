@@ -21,7 +21,11 @@ router.post('/', async (req, res, next) => {
       })
       currProduct.decrement('amount', {by: prod.CartProducts.itemAmount})
     })
-    let cart = await Cart.findOne()
+    let cart = await Cart.findOne({
+      where: {
+        userId: req.user.id
+      }
+    })
     await cart.destroy()
 
     res.status(201).json(newOrder)
