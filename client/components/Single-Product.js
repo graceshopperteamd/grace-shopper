@@ -86,7 +86,13 @@ class OneProduct extends React.Component {
             ) : (
               <form onSubmit={this.handleSubmit}>
                 <label htmlFor="quantity">Quantity</label>
-                <input type="number" id="quantity" min="1" max="20" />
+                <input
+                  type="number"
+                  id="quantity"
+                  min="1"
+                  max="20"
+                  placeholder={1}
+                />
                 <br />
                 <Button type="submit" size="sm" variant="danger">
                   Add To Cart

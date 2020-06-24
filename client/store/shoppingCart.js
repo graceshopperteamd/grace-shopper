@@ -52,6 +52,7 @@ export const fetchCart = () => {
   }
 }
 
+// thunk used by edit and remove cart buttons to edit quantity of items in cart
 export const editCart = () => {
   return async dispatch => {
     try {

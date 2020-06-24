@@ -15,6 +15,25 @@ form div {
   display: inline-block;
 }
 
+/* Fixed issue where navbar was displaying elements as a huge column,
+instead of as a row, and without spacing in between, on a small screen */
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+}
+.navbar-nav .nav-link {
+  margin: 1em;
+}
+
+/* Fixed bug where the product components in All Products page where 
+displaying products one on top of the other when the screen size 
+was too small to fit all three rows of products */
+div.card-columns {
+  display: inline-block;
+  align-content: wrap;
+}
+
 .cartItems {
   display: flex;
   align-items: center;
