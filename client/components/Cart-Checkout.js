@@ -23,14 +23,17 @@ class Cart extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault()
+
     const product = {
       id: event.target.id,
       qty: event.target.qty,
       userId: this.props.userId
     }
-    if (!product.qty)
+    if (!product.qty) {
+      console.log('event.target.id', event.target.id)
+      console.log('event.target.qty', event.target.qty)
       alert('Please indicate the qty of items you wish to have in your cart')
-    else {
+    } else {
       editCart(product)
     }
   }
@@ -85,6 +88,8 @@ class Cart extends React.Component {
         <div>
           <h2> My Shopping Cart </h2>
           <div>{this.createCartDiv(cart.products)}</div>
+          <p> Total Items: {cart.totalAmount}</p>
+          <p> Your Cart Total: $ {cart.totalPrice}</p>
 
           <div className="cartPageBtns">
             <Link to="/">

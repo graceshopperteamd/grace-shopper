@@ -37,7 +37,7 @@ class Checkout extends React.Component {
 
   // eslint-disable-next-line complexity
   handleSubmit(evt) {
-    event.preventDefault()
+    evt.preventDefault()
     if (!this.props.userId) {
       return alert('Please login or signup')
     }

@@ -7,12 +7,12 @@ import {Link} from 'react-router-dom'
  */
 
 // change imports to new file name
-export const UserHome = props => {
-  const {username} = props
-
+export const Profile = props => {
+  const {username, email} = props
   return (
     <div>
       <h3>Welcome, {username}!</h3>
+      <div> Email : {email}</div>
       <h5>Ready for a Quarantivity?</h5>
       <Link to="/products">
         <button type="button">Browse Products</button>
@@ -31,11 +31,11 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState)(UserHome)
+export default connect(mapState)(Profile)
 
 /**
  * PROP TYPES
  */
-UserHome.propTypes = {
+Profile.propTypes = {
   email: PropTypes.string
 }

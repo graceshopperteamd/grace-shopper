@@ -4,16 +4,16 @@ import {expect} from 'chai'
 import React from 'react'
 import enzyme, {shallow} from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import {UserHome} from './user-home'
+import {Profile} from './user-home'
 
 const adapter = new Adapter()
 enzyme.configure({adapter})
 
-describe('UserHome', () => {
+describe('profile', () => {
   let userHome
 
   beforeEach(() => {
-    userHome = shallow(<UserHome username="cody@email.com" />)
+    userHome = shallow(<Profile username="cody@email.com" />)
   })
 
   it('renders the username in an h3', () => {

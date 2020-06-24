@@ -70,6 +70,7 @@ router.put('/', async (req, res, next) => {
     next(err)
   }
 })
+
 router.delete('/', async (req, res, next) => {
   try {
     let deleted = await CartRelationship.destroy({
