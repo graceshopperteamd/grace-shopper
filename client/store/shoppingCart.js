@@ -61,19 +61,6 @@ export const removeItem = () => {
   }
 }
 
-export const makeOrder = order => {
-  return async dispatch => {
-    try {
-      const {data} = await axios.post('/api/order', order)
-      if (data) {
-        dispatch(placeOrder(data))
-      }
-    } catch (error) {
-      dispatch(orderErrorAction(error))
-    }
-  }
-}
-
 /**
  * REDUCER
  */
@@ -81,9 +68,10 @@ export function cartReducer(state = defaultCart, action) {
   switch (action.type) {
     // made chages to add to cart reducer as test to see if reducer was the reason items were not actually adding to the cart
     case ADD_TO_CART: {
-      let newList = [...action.shoppingcart.products]
-      newList.push(action.product)
-      return {...action.shoppingcart, product}
+      // let newList = [...action.shoppingcart.products]
+      // newList.push(action.product)
+      // return {...action.shoppingcart, product}
+      return action.product
     }
     case GOT_CART:
       return action.shoppingcart
