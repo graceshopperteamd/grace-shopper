@@ -75,7 +75,7 @@ class OneProduct extends React.Component {
         {prodQty === 0 ? (
           <div>
             <h3>
-              Sorry for the inconvinience, this item is out of stock for the
+              Sorry for the inconvenience, this item is out of stock for the
               moment
             </h3>
             <Link to="/products">
