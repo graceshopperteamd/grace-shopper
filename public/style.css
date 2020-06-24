@@ -15,6 +15,17 @@ form div {
   display: inline-block;
 }
 
+/* Fixed issue where navbar was displaying elements as a huge column,
+instead of as a row, and without spacing in between, on a small screen */
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+}
+.navbar-nav .nav-link {
+  margin: 1em;
+}
+
 /* Set Home page content to appear in center of page instead of flush with left margin */
 .homePage {
   display: flex;
@@ -27,15 +38,17 @@ form div {
   justify-content: center;
 }
 
-/* Fixed issue where navbar was displaying elements as a huge column,
-instead of as a row, and without spacing in between, on a small screen */
-.navbar-nav {
+/* Set Home page content to appear in center of page instead of flush with left margin */
+.profile {
   display: flex;
-  flex-direction: row;
-  align-content: space-between;
+  justify-content: left;
+  margin-top: 2em;
+  margin-left: 2em;
 }
-.navbar-nav .nav-link {
-  margin: 1em;
+.profileContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Fixed bug where the product components in All Products page where 
