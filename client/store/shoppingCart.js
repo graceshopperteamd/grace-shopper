@@ -20,7 +20,6 @@ const defaultCart = []
 export const AddToCart = product => ({type: ADD_TO_CART, product})
 
 const gotCart = shoppingcart => ({type: GOT_CART, shoppingcart})
-const removedItem = product => ({type: REMOVED_ITEM, product})
 const cartErrorAction = error => ({type: CART_ERROR, error})
 const placeOrder = order => ({type: PLACE_ORDER, order})
 
@@ -53,12 +52,15 @@ export const fetchCart = () => {
   }
 }
 
-export const removeItem = () => {
+// thunk used by edit and remove cart buttons to edit quantity of items in cart
+export const editCart = eventInfo => {
   return async dispatch => {
     try {
-      const {data} = await axios.delete('/api/cart')
-
-      dispatch(removedItem(data))
+      console.log(
+        '************ In redux thunk, nothing here yet. With access to following info: ',
+        eventInfo
+      )
+      // API request to change info in DB for user cart will go here
     } catch (error) {
       dispatch(cartErrorAction(error))
     }
@@ -83,13 +85,8 @@ export const makeOrder = order => {
  */
 export function cartReducer(state = defaultCart, action) {
   switch (action.type) {
-    // made chages to add to cart reducer as test to see if reducer was the reason items were not actually adding to the cart
-    case ADD_TO_CART: {
-      // let newList = [...action.shoppingcart.products]
-      // newList.push(action.product)
-      // return {...action.shoppingcart, product}
+    case ADD_TO_CART:
       return action.product
-    }
     case GOT_CART:
       return action.shoppingcart
     case CART_ERROR:

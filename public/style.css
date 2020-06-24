@@ -15,6 +15,50 @@ form div {
   display: inline-block;
 }
 
+/* Fixed issue where navbar was displaying elements as a huge column,
+instead of as a row, and without spacing in between, on a small screen */
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+}
+.navbar-nav .nav-link {
+  margin: 1em;
+}
+
+/* Set Home page content to appear in center of page instead of flush with left margin */
+.homePage {
+  display: flex;
+  justify-content: center;
+  margin: 4em;
+}
+.homeContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Set Home page content to appear in center of page instead of flush with left margin */
+.profile {
+  display: flex;
+  justify-content: left;
+  margin-top: 2em;
+  margin-left: 2em;
+}
+.profileContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Fixed bug where the product components in All Products page where 
+displaying products one on top of the other when the screen size 
+was too small to fit all three rows of products */
+div.card-columns {
+  display: inline-block;
+  align-content: wrap;
+}
+
 .cartItems {
   display: flex;
   align-items: center;
@@ -25,6 +69,7 @@ form div {
 .cartItems img {
   height: 150px;
   width: auto;
+  margin: 1em;
 }
 .cartItems div {
   margin: 1em;
@@ -40,6 +85,11 @@ form div {
 .cartPageBtns link button {
   margin: 3em;
   padding: 0.5em;
+}
+
+.qtyForm {
+  display: flex;
+  flex-direction: column;
 }
 
 .checkoutForm {
