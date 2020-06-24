@@ -5,6 +5,9 @@ const {Cart, Product, CartRelationship} = require('../db/models')
 router.get('/', async (req, res, next) => {
   try {
     const cart = await Cart.findAll({
+      where: {
+        userId: req.user.id
+      },
       include: Product
     })
     res.json(cart)
@@ -16,37 +19,36 @@ router.get('/', async (req, res, next) => {
 router.put('/', async (req, res, next) => {
   try {
     const currProduct = await Product.findByPk(req.body.id)
-    if (currProduct.amount < req.body.quantity) {
-      res.status(400)
-    }
 
-    let currCart = await Cart.findOne()
-    if (!currCart) {
-      currCart = await Cart.create({
-        userId: req.body.userId
-      })
-    }
+    let currCart = await Cart.findOrCreate({
+      where: {
+        userId: req.user.id
+      }
+    })
+    const cart = currCart[0]
 
     const prodInCart = await CartRelationship.findOne({
       where: {
-        productId: req.body.id
+        productId: req.body.id,
+        cartId: cart.id
       }
     })
+    console.log('Product CART', prodInCart)
+
     if (!prodInCart) {
-      await currCart.addProduct(req.body.id, {
+      await cart.addProduct(req.body.id, {
         through: {itemAmount: req.body.quantity}
       })
     } else {
       prodInCart.increment('itemAmount', {by: req.body.quantity})
     }
 
-    await currCart.increment({
+    await cart.increment({
       totalAmount: req.body.quantity,
       totalPrice: currProduct.dataValues.price * req.body.quantity
-    }) // this is updating totalAmount quantity via info sent from redux as it is the user that updates this data
-    // updating totalPrice from db data as it is are controlled internally and migth change on the back-end
+    })
 
-    const products = await currCart.getProducts({
+    const products = await cart.getProducts({
       attributes: ['id', 'name', 'description', 'imageUrl', 'category', 'price']
     })
 
@@ -55,7 +57,6 @@ router.put('/', async (req, res, next) => {
     next(err)
   }
 })
-
 router.delete('/', async (req, res, next) => {
   try {
     let deleted = await CartRelationship.destroy({
