@@ -15,7 +15,7 @@ const cartProducts = (cartArray = []) => {
         {item.CartProducts ? (
           <div>Quantity: {item.CartProducts.itemAmount}</div>
         ) : (
-          ''
+          <div>Quantity: {item.quantity}</div>
         )}
       </div>
     </div>
@@ -29,8 +29,8 @@ class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getCart()
     if (this.props.userId) {
+      this.props.getCart()
       window.localStorage.clear()
     }
   }
