@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
+import {Button} from 'react-bootstrap'
+
 /**
  * COMPONENT
  */
@@ -28,7 +30,9 @@ export class HomePage extends React.Component {
           yourself (it's still pretty fun!)
         </p>
         <Link to="/products">
-          <button type="button">Browse Products</button>
+          <Button variant="danger" size="sm" type="button">
+            Browse Products
+          </Button>
         </Link>
         <br />
         <br /> You are not logged in, please log in to see your personalized

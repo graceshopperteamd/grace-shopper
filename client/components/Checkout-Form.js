@@ -68,7 +68,7 @@ export const CheckoutForm = props => {
         </div>
 
         <div className="CheckoutPageBtns">
-          <Link to="/">
+          <Link to="/products">
             {' '}
             <Button type="button" variant="danger" size="sm">
               Back to Browse
