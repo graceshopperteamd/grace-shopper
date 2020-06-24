@@ -12,15 +12,17 @@ export const UserHome = props => {
   const {username} = props
 
   return (
-    <div>
-      <br />
-      <h3>Welcome, {username}!</h3>
-      <h5>Ready for a Quarantivity?</h5>
-      <Link to="/products">
-        <Button sixe="sm" variant="danger" type="button">
-          Browse Products
-        </Button>
-      </Link>
+    <div className="homePage">
+      <div className="homeContent">
+        <br />
+        <h3>Welcome, {username}!</h3>
+        <h5>Ready for a Quarantivity?</h5>
+        <Link to="/products">
+          <Button sixe="sm" variant="danger" type="button">
+            Browse Products
+          </Button>
+        </Link>
+      </div>
     </div>
   )
 }

@@ -15,6 +15,18 @@ form div {
   display: inline-block;
 }
 
+/* Set Home page content to appear in center of page instead of flush with left margin */
+.homePage {
+  display: flex;
+  justify-content: center;
+  margin: 4em;
+}
+.homeContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Fixed issue where navbar was displaying elements as a huge column,
 instead of as a row, and without spacing in between, on a small screen */
 .navbar-nav {
