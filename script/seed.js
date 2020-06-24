@@ -3,6 +3,7 @@
 const db = require('../server/db')
 const {User, Product, Order, Relationship} = require('../server/db/models')
 const faker = require('faker')
+const dummyData = require('../dummyData')
 
 const DUMMY_DATA_AMOUNT = 100
 
@@ -68,6 +69,8 @@ async function seed() {
   console.log('db synced!')
 
   await Promise.all(users.map(user => User.create(user)))
+
+  await Promise.all(dummyData.map(prod => Product.create(prod)))
 
   await Promise.all(items.map(item => Product.create(item)))
 

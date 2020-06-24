@@ -8,11 +8,11 @@ import {Link} from 'react-router-dom'
 
 // change imports to new file name
 export const UserHome = props => {
-  const {email} = props
+  const {username} = props
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {username}!</h3>
       <h5>Ready for a Quarantivity?</h5>
       <Link to="/products">
         <button type="button">Browse Products</button>
@@ -26,7 +26,8 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    email: state.user.email,
+    username: state.user.username
   }
 }
 

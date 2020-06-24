@@ -5,7 +5,7 @@ import axios from 'axios'
  */
 const GOT_CART = 'GOT_CART'
 const ADD_TO_CART = 'ADD_TO_CART'
-
+const PLACE_ORDER = 'PLACE_ORDER'
 const CART_ERROR = 'CART_ERROR'
 
 /**
@@ -16,10 +16,14 @@ const defaultCart = []
 /**
  * ACTION CREATORS
  */
+
 export const AddToCart = product => ({type: ADD_TO_CART, product})
+
 const gotCart = shoppingcart => ({type: GOT_CART, shoppingcart})
 const removedItem = product => ({type: REMOVED_ITEM, product})
 const cartErrorAction = error => ({type: CART_ERROR, error})
+const placeOrder = order => ({type: PLACE_ORDER, order})
+
 /**
  * THUNK CREATORS
  */
@@ -61,6 +65,19 @@ export const removeItem = () => {
   }
 }
 
+export const makeOrder = order => {
+  return async dispatch => {
+    try {
+      const {data} = await axios.post('/api/order', order)
+      if (data) {
+        await dispatch(placeOrder(data))
+        dispatch(fetchCart())
+      }
+    } catch (error) {
+      dispatch(cartErrorAction(error))
+    }
+  }
+}
 /**
  * REDUCER
  */
@@ -77,6 +94,8 @@ export function cartReducer(state = defaultCart, action) {
       return action.shoppingcart
     case CART_ERROR:
       return action.error
+    case PLACE_ORDER:
+      return action.order
     default:
       return state
   }

@@ -15,7 +15,7 @@ const cartProducts = (cartArray = []) => {
         {item.CartProducts ? (
           <div>Quantity: {item.CartProducts.itemAmount}</div>
         ) : (
-          ''
+          <div>Quantity: {item.quantity}</div>
         )}
       </div>
     </div>
@@ -29,8 +29,8 @@ class Checkout extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getCart()
     if (this.props.userId) {
+      this.props.getCart()
       window.localStorage.clear()
     }
   }
@@ -75,17 +75,22 @@ class Checkout extends React.Component {
 
   render() {
     let prodsInCart = this.props.shoppingCart[0]
-    // if (!this.props.userId) {
-    //   prodsInCart = JSON.parse(window.localStorage.getItem(`guestCart`))
-    // }
-    if (this.props.order.id) {
+    if (!this.props.userId) {
+      prodsInCart = JSON.parse(window.localStorage.getItem(`guestCart`))
+    }
+
+    if (this.props.order && !this.props.shoppingCart[0]) {
       return (
         <div>
           <OrderCompleteMessage />
         </div>
       )
-    }
-    if (prodsInCart) {
+    } else if (
+      prodsInCart &&
+      prodsInCart.products &&
+      prodsInCart.products.length > 0
+    ) {
+      console.log('PRODS', prodsInCart)
       return (
         <div>
           <h2> Checkout </h2>

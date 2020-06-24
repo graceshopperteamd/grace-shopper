@@ -28,8 +28,20 @@ class OneProduct extends React.Component {
     const quantity = Number(document.getElementById('quantity').value)
     if (!this.props.userId) {
       let currCart = JSON.parse(window.localStorage.getItem(`guestCart`))
-      currCart.products.push(this.props.currProduct)
-      currCart.totalPrice += this.props.currProduct.price
+      let product = {...this.props.currProduct, quantity: quantity}
+      let itemInCart = false
+
+      currCart.products.forEach(prod => {
+        if (prod.id === this.props.currProduct.id) {
+          itemInCart = true
+          console.log('prod', prod)
+          prod.quantity += quantity
+        }
+      })
+      if (!itemInCart) {
+        currCart.products.push(product)
+      }
+      currCart.totalPrice += this.props.currProduct.price * quantity
       currCart.totalAmount += quantity
 
       window.localStorage.setItem('guestCart', JSON.stringify(currCart))
@@ -55,7 +67,7 @@ class OneProduct extends React.Component {
         <main>
           <h3>{this.props.currProduct.name}</h3>
           <img src={this.props.currProduct.imageUrl} />
-          <h4>Price: {this.props.currProduct.price}</h4>
+          <h4>Price: ${this.props.currProduct.price}</h4>
           <p>
             <b>What does it include?</b> {this.props.currProduct.description}
           </p>
@@ -63,7 +75,7 @@ class OneProduct extends React.Component {
         {prodQty === 0 ? (
           <div>
             <h3>
-              Sorry for the inconvinience, this item is out of stock for the
+              Sorry for the inconvenience, this item is out of stock for the
               moment
             </h3>
             <Link to="/products">
@@ -73,13 +85,7 @@ class OneProduct extends React.Component {
         ) : (
           <form onSubmit={this.handleSubmit}>
             <label htmlFor="quantity">Quantity</label>
-            <input
-              type="number"
-              id="quantity"
-              min="1"
-              max="20"
-              placeholder="quantity"
-            />
+            <input type="number" id="quantity" min="1" max="20" />
             <br />
             <button type="submit">Add To Cart</button>
           </form>
