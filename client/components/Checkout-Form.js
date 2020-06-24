@@ -18,16 +18,18 @@ export const CheckoutForm = props => {
             />
           </div>
           <div>
-            <input name="aptNum" type="text" placeholder="Apt#" />
-          </div>
-          <div>
             <input name="city" type="text" placeholder="City" />
           </div>
           <div>
             <input name="state" type="text" placeholder="State" />
           </div>
           <div>
-            <input name="zip" type="text" placeholder="ZIP Code" />
+            <input
+              name="zip"
+              type="text"
+              pattern="[0-9]{5}"
+              placeholder="ZIP Code"
+            />
           </div>
         </div>
 
@@ -36,24 +38,24 @@ export const CheckoutForm = props => {
           <small>Payment Information</small>{' '}
         </label>
         <div>
-          <div>
-            <input
-              name="cardType"
-              type="text"
-              placeholder="Visa, MasterCard, etc"
-            />
-          </div>
+          <select name="cardType" id="cardType">
+            <option value="Visa">Visa</option>
+            <option value="AmericanExpress">American Express</option>
+            <option value="MasterCard">MasterCard</option>
+          </select>
           <div>
             <input
               name="cardNum"
               type="password"
+              min="9"
+              max="9"
               placeholder="Credit/Debit Card #"
             />
           </div>
           <div>
             <input
               name="expiration"
-              type="text"
+              type="date"
               placeholder="Expiration Date"
             />
           </div>

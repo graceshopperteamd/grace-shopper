@@ -43,7 +43,6 @@ class Checkout extends React.Component {
     }
     if (
       evt.target.streetAddress.value === '' ||
-      evt.target.aptNum.value === '' ||
       evt.target.city.value === '' ||
       evt.target.state.value === '' ||
       evt.target.zip.value === '' ||
@@ -56,10 +55,8 @@ class Checkout extends React.Component {
     }
 
     const address = `${evt.target.streetAddress.value}, ${
-      evt.target.aptNum.value
-    }, ${evt.target.city.value}, ${evt.target.state.value}, ${
-      evt.target.zip.value
-    }`
+      evt.target.city.value
+    }, ${evt.target.state.value}, ${evt.target.zip.value}`
     const payment = `${evt.target.cardType.value}, ${
       evt.target.cardNum.value
     }, ${evt.target.securityCode.value}, ${evt.target.expiration.value}`
@@ -79,7 +76,7 @@ class Checkout extends React.Component {
       prodsInCart = JSON.parse(window.localStorage.getItem(`guestCart`))
     }
 
-    if (this.props.order && !this.props.shoppingCart[0]) {
+    if (this.props.order && !prodsInCart) {
       return (
         <div>
           <OrderCompleteMessage />
