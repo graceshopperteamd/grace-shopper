@@ -2,6 +2,24 @@ const router = require('express').Router()
 module.exports = router
 const {Order, Product, Cart} = require('../db/models')
 
+router.get('/:id', async (req, res, next) => {
+  try {
+    if (!req.user) {
+      res.send("Sorry, you're not authorized to see this")
+    } else {
+      const orders = await Order.findAll({
+        where: {
+          userId: req.user.id
+        },
+        include: Product
+      })
+      res.json(orders)
+    }
+  } catch (err) {
+    next(err)
+  }
+})
+
 router.post('/', async (req, res, next) => {
   try {
     const orderToBePlaced = {

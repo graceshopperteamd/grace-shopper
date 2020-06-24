@@ -38,13 +38,6 @@ export const CheckoutForm = props => {
           <small>Payment Information</small>{' '}
         </label>
         <div>
-          {/* <div>
-            <input
-              name="cardType"
-              type="text"
-              placeholder="Visa, MasterCard, etc"
-            />
-          </div> */}
           <select name="cardType" id="cardType">
             <option value="Visa">Visa</option>
             <option value="AmericanExpress">American Express</option>
