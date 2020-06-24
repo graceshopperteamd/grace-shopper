@@ -33,8 +33,6 @@ router.put('/', async (req, res, next) => {
         cartId: cart.id
       }
     })
-    console.log('Product CART', prodInCart)
-
     if (!prodInCart) {
       await cart.addProduct(req.body.id, {
         through: {itemAmount: req.body.quantity}
