@@ -3,7 +3,10 @@ import React from 'react'
 export class QtyForm extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {value: ''}
+    this.state = {
+      value: 1,
+      id: this.props.id
+    }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleRemove = this.handleRemove.bind(this)
@@ -15,8 +18,9 @@ export class QtyForm extends React.Component {
     this.setState({value: event.target.value})
   }
   // if remove button was clicked, set quantity of 0(zero) in state
-  handleRemove(event, qty = 0) {
-    this.setState({value: qty})
+  async handleRemove(event) {
+    event.persist()
+    await this.setState({value: 0})
     this.handleSubmit(event)
   }
 
@@ -24,7 +28,7 @@ export class QtyForm extends React.Component {
   handleSubmit(event) {
     alert('New Product quantity was submitted ' + this.state.value)
     event.preventDefault()
-    this.props.handleEditCart(event)
+    this.props.handleEditCart(this.state)
   }
 
   render() {
@@ -59,23 +63,3 @@ export class QtyForm extends React.Component {
     )
   }
 }
-
-//   return (
-//     <div>
-//       <form  name={props.name + 'QtyForm'} onSubmit={props.handleSubmit}className="qtyForm">
-//         <label htmlFor={props.name}>Quantity</label>
-//         <input
-//           type="number"
-//           id={props.name}
-//           name={props.name + 'Qty'}
-//           min="1"
-//           max="20"
-//           placeholder={1}
-//         />
-//         <br />
-//         <button type="submit">Edit Qty</button>
-//         <button onClick={props.handleSubmit} id={props.name} qty={0}>Remove</button>
-//       </form>
-//     </div>
-//   )
-// }

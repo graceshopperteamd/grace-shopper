@@ -20,16 +20,16 @@ class Cart extends React.Component {
     }
   }
 
-  handleEditCart(event) {
-    event.preventDefault()
-    alert('Back to Cart successfuly, will now dispatch thunk to edit cart info')
-
+  handleEditCart(eventState) {
     const eventInfo = {
-      qty: '',
-      productId: '',
-      userId: ''
+      qty: eventState.value,
+      productId: eventState.id
     }
 
+    console.log(
+      'In frontEnt editCart handler. Will dispatch thunk to edit cart info with the following info:',
+      eventInfo
+    )
     this.props.editCart(eventInfo)
   }
 
@@ -51,6 +51,7 @@ class Cart extends React.Component {
             shoppingCart={this.props.shoppingCart}
             userId={this.props.userId}
             name={item.name}
+            id={item.id}
             handleEditCart={this.handleEditCart}
           />
         </div>

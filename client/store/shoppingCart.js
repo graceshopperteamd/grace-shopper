@@ -53,10 +53,13 @@ export const fetchCart = () => {
 }
 
 // thunk used by edit and remove cart buttons to edit quantity of items in cart
-export const editCart = () => {
+export const editCart = eventInfo => {
   return async dispatch => {
     try {
-      console.log('************ nothing here yet ***********')
+      console.log(
+        '************ In redux thunk, nothing here yet. With access to following info: ',
+        eventInfo
+      )
       // API request to change info in DB for user cart will go here
     } catch (error) {
       dispatch(cartErrorAction(error))
