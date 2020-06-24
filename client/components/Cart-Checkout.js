@@ -2,15 +2,14 @@ import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {QtyForm} from './Quantity-Change-Form'
-import {removeItem} from '../store/shoppingCart'
+import {editCart} from '../store/shoppingCart'
 import {fetchCart} from '../store/shoppingCart'
 
 class Cart extends React.Component {
   constructor(props) {
     super(props)
 
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
+    this.handleEditCart = this.handleEditCart.bind(this)
     this.createCartDiv = this.createCartDiv.bind(this)
   }
 
@@ -21,34 +20,17 @@ class Cart extends React.Component {
     }
   }
 
-  handleSubmit(event) {
+  handleEditCart(event) {
     event.preventDefault()
-    const product = {
-      id: event.target.id,
-      qty: event.target.qty,
-      userId: this.props.userId
-    }
-    if (!product.qty)
-      alert('Please indicate the qty of items you wish to have in your cart')
-    else {
-      editCart(product)
-    }
-  }
+    alert('Back to Cart successfuly, will now dispatch thunk to edit cart info')
 
-  handleRemove(event) {
-    event.preventDefault()
-
-    console.log('event target', event.target.id)
-    console.log('user id', this.props.userId)
-
-    const product = {
-      id: event.target.id,
-      userId: this.props.userId
+    const eventInfo = {
+      qty: '',
+      productId: '',
+      userId: ''
     }
-    if (!product.id) alert('Cannot identify product to remove')
-    else {
-      removeItem(product)
-    }
+
+    this.props.editCart(eventInfo)
   }
 
   createCartDiv = (cartArray = []) => {
@@ -66,11 +48,10 @@ class Cart extends React.Component {
             )}
           </div>
           <QtyForm
-            handleSubmit={this.handleSubmit}
-            handleRemove={this.handleRemove}
             shoppingCart={this.props.shoppingCart}
             userId={this.props.userId}
             name={item.name}
+            handleEditCart={this.handleEditCart}
           />
         </div>
       )

@@ -6,43 +6,59 @@ export class QtyForm extends React.Component {
     this.state = {value: ''}
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleRemove = this.handleRemove.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  // if quantity was changed, save it in state
   handleChange(event) {
     this.setState({value: event.target.value})
   }
+  // if remove button was clicked, set quantity of 0(zero) in state
+  handleRemove(event, qty = 0) {
+    this.setState({value: qty})
+    this.handleSubmit(event)
+  }
 
+  // handle submit is called either by the rmove button or by the submit button
   handleSubmit(event) {
-    alert('New Product quantity was submitted' + this.state.value)
+    alert('New Product quantity was submitted ' + this.state.value)
     event.preventDefault()
-    doSomethingWithEvent(event)
+    this.props.handleEditCart(event)
   }
 
   render() {
     return (
-      <form
-        onSubmit={this.handleSubmit}
-        name={props.name + 'QtyForm'}
-        className="qtyForm"
-      >
-        <label>
-          Quantity:
+      <div>
+        <form
+          onSubmit={this.handleSubmit}
+          name={this.props.name + 'QtyForm'}
+          className="qtyForm"
+        >
+          <label htmlFor={this.props.name}>Quantity</label>
           <input
-            type="text"
+            type="number"
+            id={this.props.name}
+            // name={this.props.productName + 'Qty'}
+            min="1"
+            max="20"
+            placeholder={1}
             value={this.state.value}
             onChange={this.handleChange}
           />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+          <br />
+          <input type="submit" value="Edit Qty" />
+        </form>
+        <input
+          type="button"
+          onClick={this.handleRemove}
+          id={this.props.name}
+          value="Remove"
+        />
+      </div>
     )
   }
 }
-
-// import React from 'react'
-
-// export const QtyForm = props => {
 
 //   return (
 //     <div>

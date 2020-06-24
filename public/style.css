@@ -25,6 +25,7 @@ form div {
 .cartItems img {
   height: 150px;
   width: auto;
+  margin-left: 2em;
 }
 .cartItems div {
   margin: 1em;
@@ -40,6 +41,11 @@ form div {
 .cartPageBtns link button {
   margin: 3em;
   padding: 0.5em;
+}
+
+.qtyForm {
+  display: flex;
+  flex-direction: column;
 }
 
 .checkoutForm {
