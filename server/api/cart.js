@@ -18,39 +18,50 @@ router.get('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
   try {
-    const currProduct = await Product.findByPk(req.body.id)
-
-    let currCart = await Cart.findOrCreate({
-      where: {
-        userId: req.user.id
-      }
-    })
-    const cart = currCart[0]
-
-    const prodInCart = await CartRelationship.findOne({
-      where: {
-        productId: req.body.id,
-        cartId: cart.id
-      }
-    })
-    if (!prodInCart) {
-      await cart.addProduct(req.body.id, {
-        through: {itemAmount: req.body.quantity}
-      })
+    if (!req.user.id) {
+      return
     } else {
-      prodInCart.increment('itemAmount', {by: req.body.quantity})
+      const currProduct = await Product.findByPk(req.body.id)
+
+      let currCart = await Cart.findOrCreate({
+        where: {
+          userId: req.user.id
+        }
+      })
+      const cart = currCart[0]
+
+      const prodInCart = await CartRelationship.findOne({
+        where: {
+          productId: req.body.id,
+          cartId: cart.id
+        }
+      })
+      if (!prodInCart) {
+        await cart.addProduct(req.body.id, {
+          through: {itemAmount: req.body.quantity}
+        })
+      } else {
+        prodInCart.increment('itemAmount', {by: req.body.quantity})
+      }
+
+      await cart.increment({
+        totalAmount: req.body.quantity,
+        totalPrice: currProduct.dataValues.price * req.body.quantity
+      })
+
+      const products = await cart.getProducts({
+        attributes: [
+          'id',
+          'name',
+          'description',
+          'imageUrl',
+          'category',
+          'price'
+        ]
+      })
+
+      res.json(products)
     }
-
-    await cart.increment({
-      totalAmount: req.body.quantity,
-      totalPrice: currProduct.dataValues.price * req.body.quantity
-    })
-
-    const products = await cart.getProducts({
-      attributes: ['id', 'name', 'description', 'imageUrl', 'category', 'price']
-    })
-
-    res.json(products)
   } catch (err) {
     next(err)
   }
