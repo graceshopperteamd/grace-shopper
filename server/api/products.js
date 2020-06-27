@@ -54,16 +54,6 @@ router.put(':/productId', async (req, res, next) => {
       .then(product => product.update(req.body))
       .then(product => res.json(product))
       .catch(next)
-    //
-    // const {data} = await Product.findByPk(productId)
-    // if (!data) {
-    //   throw Error('Something went wrong!')
-    // }
-    // const data = req.body
-    // console.log('fasdfa', data)
-    // const updatedProduct = await preProduct.updated(data)
-    // res.json(updatedProduct)
-    // res.json(data)
   } catch (error) {
     next(error)
   }
